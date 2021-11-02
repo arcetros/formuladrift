@@ -8,3 +8,4 @@ export * from "./Button";
 export * from "./Accordion";
 export * from "./Navigation";
 export * from "./icons";
+export * from "./Image";

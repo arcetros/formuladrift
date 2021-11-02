@@ -12,10 +12,17 @@ import {
   Return,
   TitleIcon,
   Typography,
+  Modal,
 } from "../../components";
 
 export default function Driver({ driver }) {
   const [toggle, setToggle] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
+
+  const close = () => {
+    setToggleModal(!toggleModal);
+  };
+
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
   let accordionMenu = {
@@ -29,9 +36,10 @@ export default function Driver({ driver }) {
     width: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 0,
     },
   };
+
   return (
     <SubLayout>
       <Return event={() => router.back()}>
@@ -51,13 +59,15 @@ export default function Driver({ driver }) {
       )}
       <DriverBio driver={driver} />
       <div className="flex justify-between mb-8">
-        <div>
+        <div onClick={() => console.log(toggleModal)}>
           <p className="text-lg font-bold text-red-500">{driver.age}</p>
           <p className="text-gray-400 -mt-1 text-sm">old</p>
         </div>
         <div className="h-auto border border-2-2 border-red-400"></div>
-        <div className="text-center">
-          <p className="text-lg font-bold text-red-500">{driver.wins}</p>
+        <div className="text-center" onClick={(e) => setToggleModal(true)}>
+          <p className="text-lg font-bold text-red-500">
+            {driver.victories.length}
+          </p>
           <p className="text-gray-400 -mt-1 text-sm">wins</p>
         </div>
         <div className="h-auto border border-2-2 border-red-400"></div>
@@ -66,7 +76,6 @@ export default function Driver({ driver }) {
           <p className="text-gray-400 -mt-1 text-sm">points</p>
         </div>
       </div>
-      {/* <OverviewCard data={driver} /> */}
       <div className="mb-4">
         <h1 className="text-gray-800 text-xl font-bold">About Driver</h1>
         {accordionMenu.menu.map((item, id) => {
@@ -89,6 +98,11 @@ export default function Driver({ driver }) {
           <YouTube videoId={driver.video} opts={opts} />
         </div>
       )}
+      {/* Modal For Drivers Stats */}
+      {toggleModal && (
+        <Modal handleClose={close} data={driver} driver={driver.slug} />
+      )}
+      {/* {toggleModal && <Modal handleClose={close} />} */}
     </SubLayout>
   );
 }

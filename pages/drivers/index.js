@@ -1,4 +1,5 @@
 import { useState } from "react";
+import _ from "lodash";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
 import {
@@ -29,10 +30,8 @@ export default function Index({ drivers }) {
     beforeChange: (current, next) => setActiveSlide(next),
   };
 
-  const sorted = drivers.sort((a, b) => {
-    const isReversed = drivers.sortType === "asc" ? 1 : -1;
-    return isReversed * b.name.localeCompare(a.name);
-  });
+  const sorted = _.orderBy(drivers, [(item) => item.name], ["asc"]);
+
   return (
     <>
       {paper && (

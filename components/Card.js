@@ -1,9 +1,9 @@
 import React from "react";
-import Image from "./Image";
 import { useRouter } from "next/router";
-import moment from "moment";
 import Link from "next/link";
+import moment from "moment";
 
+import Image from "./Image";
 import { Typography } from "./Typography";
 import { UserIcon, CalendarIcon, ClockIcon } from "./icons";
 import { strTrim } from "../utils/misc";
@@ -143,12 +143,10 @@ export const DriverCard = ({
         <div className="relative space-y-1 p-2 mx-2 rounded-md my-5">
           <div className="flex justify-between">
             <div className="">
-              <p className="flex-shrink text-sm text-gray-200 font-normal">
+              <p className="text-gray-100 font-bold text-xl">{name}</p>
+              <Typography size="sm" type="subWhite">
                 {team}
-              </p>
-              <p className="text-gray-100 font-bold tracking-widest text-xl">
-                {name}
-              </p>
+              </Typography>
             </div>
           </div>
         </div>

@@ -1,5 +1,8 @@
+import moment from "moment";
 import { motion } from "framer-motion";
 import { DotIcon } from "./icons";
+import Image from "./Image";
+import { Typography } from "./Typography";
 import { dropIn } from "./animations";
 import { ReturnButton } from "./Button";
 import { DriverListCard } from "./Card";
@@ -8,7 +11,7 @@ export const FullModal = ({ children }) => {
   return (
     <motion.div
       onClick={(e) => e.stopPropagation()}
-      className="z-50 bg-red-500 absolute top-0 left-0 w-full h-full px-8 py-4"
+      className="z-50 bg-red-500 fixed top-0 left-0 w-full h-full px-8 py-4"
       variants={dropIn}
       initial="hidden"
       animate="visible"
@@ -16,6 +19,47 @@ export const FullModal = ({ children }) => {
     >
       {children}
     </motion.div>
+  );
+};
+
+export const Modal = ({ handleClose, data, driver }) => {
+  return (
+    <FullModal>
+      <div className="flex justify-between items-center pb-5">
+        <Typography size="xl" type="primarywhite">
+          Wins
+        </Typography>
+        <ReturnButton onHandle={handleClose} />
+      </div>
+
+      <div className="flex flex-col space-y-2.5">
+        {data &&
+          data.victories.map((item, id) => {
+            return (
+              <div
+                key={id}
+                className="flex justify-between bg-white py-4 px-4 rounded-lg"
+              >
+                <div>
+                  <p>{item.track.track_name}</p>
+                  <Typography size="sm" type="sub">
+                    {moment(item.date).format("ll")}
+                  </Typography>
+                </div>
+                <div className="flex items-center">
+                  {item.placement === 1
+                    ? "First"
+                    : item.placement === 2
+                    ? "Second"
+                    : item.placement === 3
+                    ? "Third"
+                    : null}
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </FullModal>
   );
 };
 
