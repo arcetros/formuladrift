@@ -13,3 +13,11 @@ export const TypograpySize = {
   base: "text-baseline",
   sm: "text-sm",
 };
+
+export const ButtonType = {
+  primarywhite: "bg-white rounded-lg",
+};
+
+export const ButtonIcon = {
+  return: "ReturnIcon",
+};

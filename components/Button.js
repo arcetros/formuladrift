@@ -1,13 +1,11 @@
-import { ReturnIcon } from "./icons";
+import { ButtonType, ButtonIcon } from "./themes/";
+import Icon from "./ui/icon/";
 
-export const ReturnButton = ({ onHandle }) => {
+export const Button = ({ type, onHandle, className, children, icon }) => {
   return (
-    <div
-      className="flex items-center bg-white py-2 px-3 rounded-lg"
-      onClick={onHandle}
-    >
-      <ReturnIcon />
-      <p className="font-bold text-gray-800 mx-2">RETURN</p>
+    <div className={[ButtonType[type], className].join(" ")} onClick={onHandle}>
+      {icon && <Icon type={icon} />}
+      {children}
     </div>
   );
 };

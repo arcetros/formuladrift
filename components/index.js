@@ -5,7 +5,7 @@ export * from "./Typography";
 export * from "./seo";
 export * from "./Modal";
 export * from "./Button";
-export * from "./Accordion";
+export * from "./ui/accordion/";
 export * from "./Navigation";
 export * from "./icons";
 export * from "./Image";

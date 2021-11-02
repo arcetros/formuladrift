@@ -1,13 +1,8 @@
-import { PlusIcon, NegIcon } from "./icons";
 import { motion, AnimatePresence } from "framer-motion";
+import { PlusIcon, NegIcon } from "../../icons";
 
-export const DriverAccordion = ({
-  i,
-  expanded,
-  setExpanded,
-  title,
-  content,
-}) => {
+const DriverAccordion = (props) => {
+  const { i, expanded, setExpanded, title, content } = props;
   const isOpen = i === expanded;
   return (
     <>
@@ -41,3 +36,5 @@ export const DriverAccordion = ({
     </>
   );
 };
+
+export default DriverAccordion;

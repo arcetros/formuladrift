@@ -4,7 +4,7 @@ import { DotIcon } from "./icons";
 import Image from "./Image";
 import { Typography } from "./Typography";
 import { dropIn } from "./animations";
-import { ReturnButton } from "./Button";
+import Button from "./ui/button/";
 import { DriverListCard } from "./Card";
 
 export const FullModal = ({ children }) => {
@@ -29,7 +29,14 @@ export const Modal = ({ handleClose, data, driver }) => {
         <Typography size="xl" type="primarywhite">
           Wins
         </Typography>
-        <ReturnButton onHandle={handleClose} />
+        <Button
+          onHandle={handleClose}
+          type="primarywhite"
+          className="flex items-center py-2 px-3"
+          icon="ReturnIcon"
+        >
+          <p className="font-bold text-gray-800 mx-2">RETURN</p>
+        </Button>
       </div>
 
       <div className="flex flex-col space-y-2.5">
@@ -72,7 +79,14 @@ export const DriverListModal = ({ handleClose, content, drivers }) => {
           <span>/</span>
           <span className="text-gray-200">AM</span>
         </div>
-        <ReturnButton onHandle={handleClose} />
+        <Button
+          onHandle={handleClose}
+          type="primarywhite"
+          className="flex items-center py-2 px-3"
+          icon="ReturnIcon"
+        >
+          <p className="font-bold text-gray-800 mx-2">RETURN</p>
+        </Button>
       </div>
       <div className="grid grid-cols-1 my-5 gap-2">
         <DriverListCard drivers={drivers} />
