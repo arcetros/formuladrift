@@ -2,29 +2,33 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import YouTube from "react-youtube";
 import { fetchAPI } from "../../lib/api";
-import { ImgContainer, Img } from "../../components/Image";
 import {
   SubLayout,
-  EmptyCard,
-  DriverBio,
-  OverviewCard,
   DriverAccordion,
   Return,
   TitleIcon,
   Typography,
   Modal,
+  Stats,
+  Name,
+  DriverImage,
 } from "../../components";
 
 export default function Driver({ driver }) {
+  const router = useRouter();
+
   const [toggle, setToggle] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  const close = () => {
-    setToggleModal(!toggleModal);
+  const open = () => {
+    setToggleModal(true);
   };
 
-  const [expanded, setExpanded] = useState(false);
-  const router = useRouter();
+  const close = () => {
+    setToggleModal(false);
+  };
+
   let accordionMenu = {
     menu: [
       ["Biography", driver.biography],
@@ -43,66 +47,47 @@ export default function Driver({ driver }) {
   return (
     <SubLayout>
       <Return event={() => router.back()}>
+        {/* title icon should be dynamic later on */}
         <TitleIcon>2021 PRO DRIVER</TitleIcon>
       </Return>
-      {driver ? (
-        <ImgContainer className="relative h-[300px]">
-          <Img
-            layout="fill"
-            src={driver.driver_img.url}
-            alt={driver.name}
-            styles="object-contain md:object-scale-down w-full"
-          />
-        </ImgContainer>
-      ) : (
-        <EmptyCard />
-      )}
-      <DriverBio driver={driver} />
-      <div className="flex justify-between mb-8">
-        <div onClick={() => console.log(toggleModal)}>
-          <p className="text-lg font-bold text-red-500">{driver.age}</p>
-          <p className="text-gray-400 -mt-1 text-sm">old</p>
+      <div className="lg:grid lg:grid-cols-10 lg:mt-12 lg:gap-y-28">
+        <div className="lg:col-span-4">
+          <DriverImage url={driver.driver_img.url} name={driver.name} />
         </div>
-        <div className="h-auto border border-2-2 border-red-400"></div>
-        <div className="text-center" onClick={(e) => setToggleModal(true)}>
-          <p className="text-lg font-bold text-red-500">
-            {driver.victories.length}
-          </p>
-          <p className="text-gray-400 -mt-1 text-sm">wins</p>
+        <div className="lg:my-auto lg:col-span-6">
+          <Name driver={driver} />
+          <Stats driver={driver} event={open} />
         </div>
-        <div className="h-auto border border-2-2 border-red-400"></div>
-        <div className="text-right">
-          <p className="text-lg font-bold text-red-500">{driver.points}</p>
-          <p className="text-gray-400 -mt-1 text-sm">points</p>
+        <Typography type="primary" styles="mb-2 lg:text-5xl lg:col-span-3">
+          About Driver
+        </Typography>
+        <div className="mb-4 lg:col-span-7">
+          {accordionMenu.menu.map((item, id) => {
+            return (
+              <div key={id} className="my-3">
+                <DriverAccordion
+                  i={id}
+                  expanded={expanded}
+                  setExpanded={setExpanded}
+                  title={item[0]}
+                  content={item[1]}
+                />
+              </div>
+            );
+          })}
         </div>
-      </div>
-      <div className="mb-4">
-        <h1 className="text-gray-800 text-xl font-bold">About Driver</h1>
-        {accordionMenu.menu.map((item, id) => {
-          return (
-            <div key={id} className="my-3">
-              <DriverAccordion
-                i={id}
-                expanded={expanded}
-                setExpanded={setExpanded}
-                title={item[0]}
-                content={item[1]}
-              />
-            </div>
-          );
-        })}
       </div>
       {driver.video && (
         <div>
-          <h1 className="font-bold mb-2 text-xl text-gray-800">Videos</h1>
+          <Typography type="primary" size="lg" styles="mb-2">
+            Videos
+          </Typography>
           <YouTube videoId={driver.video} opts={opts} />
         </div>
       )}
-      {/* Modal For Drivers Stats */}
       {toggleModal && (
         <Modal handleClose={close} data={driver} driver={driver.slug} />
       )}
-      {/* {toggleModal && <Modal handleClose={close} />} */}
     </SubLayout>
   );
 }

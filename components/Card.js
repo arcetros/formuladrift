@@ -214,7 +214,7 @@ export const DriverBio = ({ children, driver }) => {
         <Typography type="sub" size="sm">
           {driver.team_name}
         </Typography>
-        <div className="flex">
+        <div className="flex flex-shrink-0 items-center">
           <Typography type="primary" size="xl">
             {driver.name}
           </Typography>

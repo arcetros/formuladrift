@@ -1,6 +1,11 @@
 import { TypographyType, TypograpySize } from "./themes";
 
-export const Typography = ({ type, size, children }) => {
-  const classNames = TypographyType[type] + " " + TypograpySize[size];
-  return <p className={classNames}>{children}</p>;
+export const Typography = ({ type, size, children, styles }) => {
+  return (
+    <p
+      className={[TypographyType[type], TypograpySize[size], styles].join(" ")}
+    >
+      {children}
+    </p>
+  );
 };

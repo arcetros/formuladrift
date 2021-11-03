@@ -8,10 +8,10 @@ export const TypographyType = {
 };
 
 export const TypograpySize = {
-  xl: "text-2xl",
+  xl: "text-2xl lg:text-5xl",
   lg: "text-lg",
   base: "text-baseline",
-  sm: "text-sm",
+  sm: "text-sm lg:text-lg",
 };
 
 export const ButtonType = {

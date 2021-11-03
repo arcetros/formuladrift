@@ -35,17 +35,19 @@ export const Modal = ({ handleClose, data, driver }) => {
           className="flex items-center py-2 px-3"
           icon="ReturnIcon"
         >
-          <p className="font-bold text-gray-800 mx-2">RETURN</p>
+          <Typography type="primary" size="lg" styles="mx-2">
+            RETURN
+          </Typography>
         </Button>
       </div>
 
       <div className="flex flex-col space-y-2.5">
-        {data &&
+        {data.victories.length ? (
           data.victories.map((item, id) => {
             return (
               <div
                 key={id}
-                className="flex justify-between bg-white py-4 px-4 rounded-lg"
+                className="flex justify-between bg-white p-4 rounded-lg"
               >
                 <div>
                   <p>{item.track.track_name}</p>
@@ -64,7 +66,18 @@ export const Modal = ({ handleClose, data, driver }) => {
                 </div>
               </div>
             );
-          })}
+          })
+        ) : (
+          <div className="p-4 bg-white rounded-lg">
+            <div className="flex animate-pulse flex-row items-center h-full justify-between space-x-5">
+              <div className="flex flex-col space-y-3">
+                <div className="w-36 bg-gray-300 h-6 rounded-md "></div>
+                <div className="w-24 bg-gray-300 h-6 rounded-md "></div>
+              </div>
+              <div className="w-12 bg-gray-300 h-12 rounded-full "></div>
+            </div>
+          </div>
+        )}
       </div>
     </FullModal>
   );
@@ -98,21 +111,28 @@ export const DriverListModal = ({ handleClose, content, drivers }) => {
 export const DriverNavigation = ({ currentDriver, totalDriver, setPaper }) => {
   return (
     <>
-      <div className="z-20 flex justify-between py-4 bg-red-500 w-full">
-        <div className="font-bold text-2xl text-gray-100">
+      <div className="z-20 flex justify-between py-4 px-4 bg-red-500 w-full">
+        <div className="font-bold text-2xl text-gray-100 lg:hidden">
           {1 + currentDriver}
           <span className="text-gray-200"> / {totalDriver}</span>
         </div>
         <div
-          className="flex items-center bg-white px-3 rounded-lg font-bold text-sm text-gray-800"
+          className="flex items-center bg-white px-3 rounded-lg font-bold text-sm text-gray-800 lg:hidden"
           onClick={() => setPaper(true)}
         >
           <DotIcon />
           <span className="mx-1">SEE ALL</span>
         </div>
+        <div className="hidden lg:flex">
+          <div className="font-bold flex items-center text-white text-2xl space-x-2">
+            <span>PRO</span>
+            <span>/</span>
+            <span className="text-gray-200">AM</span>
+          </div>
+        </div>
       </div>
-      <div className="absolute left-0 -bottom-0 w-full py-5 px-8 bg-red-500 z-10">
-        test
+      <div className="absolute left-0 -bottom-0 w-full py-8 px-8 bg-red-500 z-10">
+        {""}
       </div>
     </>
   );
