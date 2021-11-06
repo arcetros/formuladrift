@@ -6,7 +6,7 @@ const DriverAccordion = (props) => {
   const { i, expanded, setExpanded, title, content } = props;
   const isOpen = i === expanded;
   return (
-    <>
+    <div className="max-w-[68.5ch]">
       <Accordion
         setExpanded={setExpanded}
         isOpen={isOpen}
@@ -16,7 +16,7 @@ const DriverAccordion = (props) => {
       <AnimatePresence initial={false}>
         {isOpen && <Content content={content} />}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 

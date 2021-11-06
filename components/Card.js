@@ -1,9 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
+import _ from "lodash";
 
-import Image from "./Image";
+import Img from "./Image";
 import { Typography } from "./Typography";
 import { UserIcon, CalendarIcon, ClockIcon } from "./icons";
 import { strTrim } from "../utils/misc";
@@ -22,17 +24,27 @@ export const MainCard = ({ posts }) => {
               passHref={true}
               key={id}
             >
-              <div className="flex flex-col items-stretch bg-white rounded-lg min-h-full shadow-xl pb-4 mt-4">
-                <div className="flex-shrink-0 h-[192px] w-auto relative">
-                  <Image
+              <div className="flex flex-col items-stretch bg-white min-h-full shadow-xl">
+                <div className="flex-shrink-1 h-[192px] lg:h-[500px] w-auto relative">
+                  <Img
                     layout="fill"
                     src={url}
                     alt="title"
-                    styles="object-cover rounded-lg rounded-b-none w-full"
+                    styles="object-cover rounded-b-none w-full"
                   />
+                  <div className="absolute bg-gradient-to-t from-gray-900 bottom-0 w-full">
+                    <div className="px-6 text-gray-100 font-semibold p-4 lg:p-8">
+                      <span className="rounded-md font-normal">
+                        {moment(item.published_at).format("dddd") +
+                          " | " +
+                          moment(item.published_at).format("MMM Do YY")}
+                      </span>
+                      <p className="text-sm lg:text-xl mt-1">{item.title}</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex-1 bg-white flex flex-col justify-between mx-4 pt-4">
+                {/* <div className="flex-1 bg-white flex flex-col justify-between mx-4 pt-4">
                   <div className="flex-1 mb-2">
                     <p className="font-medium text-gray-800 text-sm">
                       {item.title}
@@ -51,7 +63,7 @@ export const MainCard = ({ posts }) => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </Link>
           );
@@ -64,42 +76,38 @@ export const MainCard = ({ posts }) => {
 export const SubCard = ({ posts }) => {
   return (
     <>
-      {posts.map((item, id) => {
-        return (
-          <Link
-            as={`/article/${item.slug}`}
-            href="/article/[slug]"
-            passHref={true}
-            key={id}
-          >
-            <div className="relative flex items-stretch mb-3">
-              <div className="flex-shrink-0 h-[68px] w-[82px] relative">
+      {posts
+        .slice(0, 3)
+        .sort((a, b) => {
+          let dateA = new Date(a.published_at);
+          let dateB = new Date(b.published_at);
+          return dateB - dateA;
+        })
+        .map((item, id) => {
+          return (
+            <div key={id} className="shadow-lg lg:container lg:mr-3 last:mr-0">
+              <div className="relative w-[auto] h-[220px] lg:h-[240px]">
                 <Image
+                  className="relative h-full w-full object-cover"
                   layout="fill"
                   src={item.thumbnail.url}
                   alt={item.title}
-                  styles="object-cover rounded-lg w-full"
                 />
               </div>
-              <div className="relative text-xs ml-4 w-full">
-                <h1 className="overflow-ellipsis">
-                  {strTrim(item.title, 60, " ", "...")}
-                </h1>
-                <div className="flex justify-between absolute bottom-0 text-[9px] w-full text-gray-400">
-                  <div className="flex">
-                    <CalendarIcon margin="mr-1" />
-                    {moment(item.date).format("LL")}
-                  </div>
-                  <div className="flex">
-                    <ClockIcon margin="mr-1" />
-                    {item.duration}
-                  </div>
-                </div>
+
+              <div className="px-6 py-4 relative">
+                <span className="text-xs font-normal">
+                  {moment(item.published_at).format("dddd") +
+                    " | " +
+                    moment(item.published_at).format("MMM Do YY")}
+                </span>
+                <p className="font-bold text-xs overflow-ellipsis text-gray-800">
+                  {item.title}
+                </p>
               </div>
             </div>
-          </Link>
-        );
-      })}
+          );
+        })}
     </>
   );
 };
@@ -120,34 +128,12 @@ export const DriverCard = ({
 }) => {
   return (
     <Link as={`/drivers/${slug}`} href="/drivers/[driver]" passHref={true}>
-      <div className="flex flex-col justify-between relative h-[22.563rem] w-[15.563rem] py-1 rounded-3xl bg-red-500 drop-shadow-xl">
-        <div className="relative my-2 mx-4 w-[50px] h-[50px]">
-          <Image
-            layout="fill"
-            src={country}
-            alt={name}
-            styles="rounded-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 text-center mx-auto text-[11rem] z-10 font-medium text-red-900">
-          {number}
-        </div>
-        <div className="relative items-center flex mt-auto w-[15.500rem] h-[11.813rem]">
-          <Image
-            layout="fill"
-            src={driverImg}
-            alt={name}
-            styles="object-cover z-20"
-          />
-        </div>
-        <div className="relative space-y-1 p-2 mx-2 rounded-md my-5">
-          <div className="flex justify-between">
-            <div className="">
-              <p className="text-gray-100 font-bold text-xl">{name}</p>
-              <Typography size="sm" type="subWhite">
-                {team}
-              </Typography>
-            </div>
+      <div className="flex-1 bg-gray-100 rounded-md drop-shadow-sm cursor-pointer">
+        <div className="p-4">
+          <div className="flex items-center">
+            <Image width="20" height="20" src={country} alt="test" />
+            <span className="mx-7">{name}</span>
+            <span className="ml-auto font-medium text-gray-300">{number}</span>
           </div>
         </div>
       </div>
@@ -165,7 +151,7 @@ export const DriverListCard = ({ drivers }) => {
             className="flex items-stretch bg-red-900 bg-opacity-40  text-gray-100 rounded-lg p-2"
           >
             <div className="relative mr-3 w-[25px] h-[25px]">
-              <Image
+              <Img
                 layout="fill"
                 src={item.driver_country.url}
                 alt={item.name}

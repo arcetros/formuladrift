@@ -41,26 +41,57 @@ export default function Index({ drivers }) {
           drivers={drivers}
         />
       )}
-      <Slider {...settings}>
-        {sorted.map((item, id) => {
-          return (
-            <DriverCard
-              key={id}
-              name={item.name}
-              team={item.team_name}
-              number={item.driver_number}
-              country={item.driver_country.url}
-              driverImg={item.driver_img.url}
-              slug={item.slug}
-            />
-          );
-        })}
-      </Slider>
-      <DriverNavigation
-        currentDriver={activeSlide}
-        setPaper={setPaper}
-        totalDriver={drivers.length}
-      />
+      <section className="relative">
+        <div className="md:max-w-6xl mx-auto md:px-4 px-6">
+          <div className="grid grid-cols-2 gap-y-7 gap-x-10 lg:grid-cols-10 pt-24 md:pt-24">
+            <div className="col-span-2 lg:col-span-2 flex font-bold text-white max-h-56">
+              <div className="flex flex-row rounded-lg lg:flex-col my-auto w-full text-base gap-y-2 gap-x-3 text-center lg:text-left">
+                <span className="flex-1 rounded-xl p-2 lg:p-4 bg-red-500">
+                  All
+                </span>
+                <span className="flex-1 rounded-xl p-2 lg:p-4 bg-red-500">
+                  PRO
+                </span>
+                <span className="flex-1 rounded-xl p-2 lg:p-4 bg-red-500">
+                  PROSPEC
+                </span>
+              </div>
+            </div>
+            <div className="col-span-2 lg:col-span-8">
+              <div className="flex flex-col lg:flex-row gap-x-3">
+                {sorted.map((item, id) => {
+                  return (
+                    <DriverCard
+                      key={id}
+                      name={item.name}
+                      team={item.team_name}
+                      number={item.driver_number}
+                      country={item.driver_country.url}
+                      driverImg={item.driver_img.url}
+                      slug={item.slug}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <Slider {...settings}>
+          {sorted.map((item, id) => {
+            return (
+              <DriverCard
+                key={id}
+                name={item.name}
+                team={item.team_name}
+                number={item.driver_number}
+                country={item.driver_country.url}
+                driverImg={item.driver_img.url}
+                slug={item.slug}
+              />
+            );
+          })}
+        </Slider> */}
+      </section>
     </>
   );
 }

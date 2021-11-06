@@ -9,12 +9,20 @@ import { Typography } from "./Typography";
 import { dropIn } from "./animations";
 
 export default function Header() {
+  const [top, setTop] = useState(true);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setIsOpen(false);
   }, [router.asPath]);
+  useEffect(() => {
+    const scrollHandler = () => {
+      window.pageYOffset > 10 ? setTop(false) : setTop(true);
+    };
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [top]);
 
   let paths = {
     name: [
@@ -24,9 +32,13 @@ export default function Header() {
   };
 
   return (
-    <>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
+    <header
+      className={`fixed w-full z-30 transition duration-300 ease-in-out ${
+        !top && "bg-white bg-opacity-90 shadow-lg"
+      }`}
+    >
+      <div className="mx-auto max-w-6xl px-2 flex justify-between items-center">
+        <div className="h-20 flex items-center">
           <div className="flex-shrink-0 md:hidden">
             <button
               className="bg-red-100 p-1 rounded-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -49,9 +61,11 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <div className="md:order-first">
-          <FDLogo />
-        </div>
+        <Link as="/" href="/" passHref={true}>
+          <div className="md:order-first cursor-pointer">
+            <FDLogo />
+          </div>
+        </Link>
         <div>
           <SearchIcon />
         </div>
@@ -78,6 +92,6 @@ export default function Header() {
           </div>
         </motion.div>
       )}
-    </>
+    </header>
   );
 }
