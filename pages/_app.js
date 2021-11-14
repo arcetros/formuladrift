@@ -1,13 +1,16 @@
+import { createContext } from "react";
 import App from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import "tailwindcss/tailwind.css";
-import { createContext } from "react";
-import { getStrapiMedia } from "../lib/media";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { AnimatePresence } from "framer-motion";
 import { fetchAPI } from "../lib/api";
 import { Layout } from "../components/Layout";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-//Store Strapi Global object in context
+const queryClient = new QueryClient();
 export const GlobalContext = createContext({});
 
 const MyApp = ({ Component, pageProps }) => {
@@ -22,13 +25,17 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <GlobalContext.Provider value={global}>
-        {showLayout ? (
-          <Layout>
+        <QueryClientProvider client={queryClient}>
+          <Header />
+          <AnimatePresence
+            exitBeforeEnter
+            initial={false}
+            onExitComplete={() => window.scrollTo(0, 0)}
+          >
             <Component {...pageProps} />
-          </Layout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          </AnimatePresence>
+          <Footer />
+        </QueryClientProvider>
       </GlobalContext.Provider>
     </>
   );

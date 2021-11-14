@@ -36,7 +36,6 @@ export const BottomSheet = ({ isOpen, onClose, onOpen, posts }) => {
       </div>
       <h1 className="font-bold text-gray-800 text-lg mt-6">{posts.title}</h1>
       <div className="flex justify-between my-5 text-gray-500">
-        <div>{posts.users[0].username}</div>
         <div>{moment(posts.created_at).format("LL")}</div>
       </div>
       <p className="overflow-x-hidden tracking-wide leading-relaxed">

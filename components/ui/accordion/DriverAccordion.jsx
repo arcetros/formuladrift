@@ -6,7 +6,7 @@ const DriverAccordion = (props) => {
   const { i, expanded, setExpanded, title, content } = props;
   const isOpen = i === expanded;
   return (
-    <div className="max-w-[68.5ch]">
+    <div className="max-w-[27.8ch] md:min-w-full lg:max-w-[71.4ch]">
       <Accordion
         setExpanded={setExpanded}
         isOpen={isOpen}

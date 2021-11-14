@@ -10,104 +10,121 @@ import { Typography } from "./Typography";
 import { UserIcon, CalendarIcon, ClockIcon } from "./icons";
 import { strTrim } from "../utils/misc";
 
+const SkeletonCard = ({ children, sizes }) => {
+  return (
+    <div
+      className={`flex flex-col items-stretch min-h-full shadow-xl ${sizes} bg-gray-200 animate-pulse`}
+    >
+      <div className="flex mt-auto h-28">
+        <div className="flex flex-col my-auto px-6 gap-y-4 w-full">
+          <div className="w-24 bg-gray-300 h-6 rounded-md "></div>
+          <div className="w-2/3 bg-gray-300 h-6 rounded-md "></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const MainCard = ({ posts }) => {
   const rowLen = posts.length;
   return (
     <>
-      {posts.map((item, id) => {
-        if (rowLen === id + 1) {
-          const url = item.thumbnail.url;
-          return (
-            <Link
-              as={`/article/${item.slug}`}
-              href="/article/[slug]"
-              passHref={true}
-              key={id}
-            >
-              <div className="flex flex-col items-stretch bg-white min-h-full shadow-xl">
-                <div className="flex-shrink-1 h-[192px] lg:h-[500px] w-auto relative">
-                  <Img
-                    layout="fill"
-                    src={url}
-                    alt="title"
-                    styles="object-cover rounded-b-none w-full"
-                  />
-                  <div className="absolute bg-gradient-to-t from-gray-900 bottom-0 w-full">
-                    <div className="px-6 text-gray-100 font-semibold p-4 lg:p-8">
-                      <span className="rounded-md font-normal">
-                        {moment(item.published_at).format("dddd") +
-                          " | " +
-                          moment(item.published_at).format("MMM Do YY")}
-                      </span>
-                      <p className="text-sm lg:text-xl mt-1">{item.title}</p>
+      {posts ? (
+        posts.map((item, id) => {
+          if (rowLen === id + 1) {
+            const url = item.thumbnail.url;
+            return (
+              <Link
+                as={`/article/${item.slug}`}
+                href="/article/[slug]"
+                passHref={true}
+                key={id}
+              >
+                <div className="flex flex-col items-stretch min-h-full shadow-xl">
+                  <div className="flex-shrink-1 h-[250px] md:h-[500px] w-auto relative">
+                    <Img
+                      layout="fill"
+                      src={url}
+                      alt="title"
+                      styles="object-cover w-full rounded"
+                    />
+                    <div className="absolute bg-gradient-to-t from-gray-900 bottom-0 w-full rounded">
+                      <div className="px-6 text-gray-100 font-semibold p-4 lg:p-8">
+                        <span className="rounded-md font-normal">
+                          {moment(item.published_at).format("dddd") +
+                            " | " +
+                            moment(item.published_at).format("MMM Do YY")}
+                        </span>
+                        <p className="text-sm lg:text-xl mt-1">{item.title}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="flex-1 bg-white flex flex-col justify-between mx-4 pt-4">
-                  <div className="flex-1 mb-2">
-                    <p className="font-medium text-gray-800 text-sm">
-                      {item.title}
-                    </p>
-                  </div>
-                  <div className="flex justify-between my-2 text-xs">
-                    <div className="flex items-center">
-                      <UserIcon />
-                      <p className="text-gray-400 ml-1.5">
-                        {item.users[0].username}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-gray-400">
-                        {moment(item.date).format("LL")}
-                      </p>
-                    </div>
-                  </div>
-                </div> */}
-              </div>
-            </Link>
-          );
-        }
-      })}
+              </Link>
+            );
+          }
+        })
+      ) : (
+        <SkeletonCard sizes="h-[192px] md:h-[500px]" />
+      )}
     </>
   );
 };
 
 export const SubCard = ({ posts }) => {
+  const skeletonId = [0, 1, 2];
   return (
     <>
       {posts
-        .slice(0, 3)
-        .sort((a, b) => {
-          let dateA = new Date(a.published_at);
-          let dateB = new Date(b.published_at);
-          return dateB - dateA;
-        })
-        .map((item, id) => {
-          return (
-            <div key={id} className="shadow-lg lg:container lg:mr-3 last:mr-0">
-              <div className="relative w-[auto] h-[220px] lg:h-[240px]">
-                <Image
-                  className="relative h-full w-full object-cover"
-                  layout="fill"
-                  src={item.thumbnail.url}
-                  alt={item.title}
+        ? posts
+            .slice(0, 4)
+            .sort((a, b) => {
+              let dateA = new Date(a.published_at);
+              let dateB = new Date(b.published_at);
+              return dateB - dateA;
+            })
+            .map((item, id) => {
+              return (
+                <Link
+                  as={`/article/${item.slug}`}
+                  href="/article/[slug]"
+                  passHref={true}
+                  key={id}
+                >
+                  <div className="mb-4 md:mb-0 md:container md:mr-3 last:mr-0">
+                    <div className="relative flex flex-shrink-0 w-[auto] h-[220px] md:h-[230px]">
+                      <Image
+                        className="relative h-full w-full object-cover rounded"
+                        layout="fill"
+                        src={item.thumbnail.url}
+                        alt={item.title}
+                      />
+                    </div>
+
+                    <div className="pt-1 pb-4 relative">
+                      <span className="text-sm font-extralight text-gray-500">
+                        {moment(item.published_at).format("dddd") +
+                          " | " +
+                          moment(item.published_at).format("MMM Do YY")}
+                      </span>
+                      <p className="font-semibold text-sm text-gray-900">
+                        {item.title}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })
+        : skeletonId.map((id) => {
+            return (
+              <div key={id} className="lg:container lg:mr-3 last:mr-0">
+                <SkeletonCard
+                  key={id}
+                  sizes="w-[auto] h-[220px] lg:h-[249px]"
                 />
               </div>
-
-              <div className="px-6 py-4 relative">
-                <span className="text-xs font-normal">
-                  {moment(item.published_at).format("dddd") +
-                    " | " +
-                    moment(item.published_at).format("MMM Do YY")}
-                </span>
-                <p className="font-bold text-xs overflow-ellipsis text-gray-800">
-                  {item.title}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
     </>
   );
 };
@@ -128,7 +145,7 @@ export const DriverCard = ({
 }) => {
   return (
     <Link as={`/drivers/${slug}`} href="/drivers/[driver]" passHref={true}>
-      <div className="flex-1 bg-gray-100 rounded-md drop-shadow-sm cursor-pointer">
+      <div className="flex-1 min-w-[26ch] md:min-w-[50ch] lg:min-w-[27ch] bg-gray-100 rounded-md drop-shadow-sm cursor-pointer">
         <div className="p-4">
           <div className="flex items-center">
             <Image width="20" height="20" src={country} alt="test" />

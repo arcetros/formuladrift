@@ -7,7 +7,7 @@ const Align = {
 const Item = ({ data, title, handleEvent, position }) => {
   return (
     <div onClick={handleEvent} className={Align[position]}>
-      <p className="text-lg font-bold text-red-500 lg:text-2xl">{data}</p>
+      <p className="text-lg font-bold text-red-500 md:text-xl">{data}</p>
       <p className="text-gray-400 -mt-1 text-sm">{title}</p>
     </div>
   );
