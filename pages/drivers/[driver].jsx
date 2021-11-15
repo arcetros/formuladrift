@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import YouTube from "react-youtube";
 import { fetchAPI } from "../../lib/api";
 import {
@@ -15,8 +14,6 @@ import {
 } from "../../components";
 
 export default function Driver({ driver }) {
-  const router = useRouter();
-
   const [toggle, setToggle] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -44,7 +41,7 @@ export default function Driver({ driver }) {
 
   return (
     <Layout>
-      <div className="md:grid md:grid-cols-10 lg:mt-12 md:gap-y-5 lg:gap-y-28 md:gap-x-10 md:px-12">
+      <section className="md:grid md:grid-cols-10 lg:mt-12 md:gap-y-5 lg:gap-y-28 md:gap-x-10 md:px-12">
         <div className="md:col-span-6 lg:col-span-4">
           <DriverImage url={driver.driver_img.url} name={driver.name} />
         </div>
@@ -62,15 +59,13 @@ export default function Driver({ driver }) {
         <div className="mb-4 md:col-span-10 lg:col-span-7">
           {accordionMenu.menu.map((item, id) => {
             return (
-              <div className="mb-2" key={id}>
-                <DriverAccordion
-                  i={id}
-                  expanded={expanded}
-                  setExpanded={setExpanded}
-                  title={item[0]}
-                  content={item[1]}
-                />
-              </div>
+              <DriverAccordion
+                key={id}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                title={item[0]}
+                content={item[1]}
+              />
             );
           })}
         </div>
@@ -86,7 +81,7 @@ export default function Driver({ driver }) {
             />
           </div>
         )}
-      </div>
+      </section>
       {toggleModal && (
         <Modal handleClose={close} data={driver} driver={driver.slug} />
       )}

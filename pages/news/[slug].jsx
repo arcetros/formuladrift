@@ -1,44 +1,21 @@
-import { useState, useEffect } from "react";
+import Image from "next/image";
 import { marked } from "marked";
-import { useRouter } from "next/router";
 import moment from "moment";
 import { fetchAPI } from "../../lib/api";
-import { Layout } from "../../components/Layout";
-import Img from "../../components/Image";
-import { BottomSheet } from "../../components/BottomSheet";
-import { EmptyCard } from "../../components/Card";
-import { ShareIcon, ReturnIcon, DownArrow } from "../../components/icons";
+import { Layout, EmptyCard } from "../../components";
 
 export default function Article({ posts, publishedDate }) {
-  const [toggle, setToggle] = useState(false);
-  const router = useRouter();
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  function onClose() {
-    setIsOpen(false);
-  }
-
-  function onOpen() {
-    setIsOpen(true);
-  }
-
-  function onToggle() {
-    setIsOpen(!isOpen);
-    console.log(isOpen);
-  }
-
   return (
     <Layout>
       <section className="relative">
         <div className="md:max-w-6xl md:px-4">
           {posts ? (
             <div className="relative -mt-4 h-56 lg:h-96">
-              <Img
+              <Image
                 layout="fill"
                 src={posts.thumbnail.url}
                 alt={posts.title}
-                styles="object-cover w-full"
+                className="object-cover w-full"
               />
             </div>
           ) : (

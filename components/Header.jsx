@@ -74,9 +74,11 @@ export default function Header() {
                     </Popover>
                   </div>
                   <div>
-                    <a className="px-3 py-2 rounded font-medium text-md text-gray-500">
-                      News
-                    </a>
+                    <Link as="/news" href="/news" passHref={true}>
+                      <a className="px-3 py-2 rounded font-medium text-md text-gray-500">
+                        News
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>

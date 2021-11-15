@@ -41,48 +41,40 @@ export default function Index({ drivers }) {
 
   const sorted = _.orderBy(data, [(item) => item.name], ["asc"]);
 
+  const FilterDriver = ({ league }) => {
+    return (
+      <span
+        className="flex flex-1 items-center justify-between rounded p-2 lg:p-4 bg-red-500"
+        onClick={() => setCategory(league ? league : "")}
+      >
+        <span className="uppercase text-white text-xs md:text-base font-medium">
+          {league ? league : "All"}
+        </span>
+        <span className="text-red-800">
+          {league
+            ? _.filter(drivers, { category: league }).length
+            : drivers.length}
+        </span>
+      </span>
+    );
+  };
+
   return (
     <Layout>
       <section className="relative min-h-[40rem]">
         <div className="md:px-4 px-6">
           <div className="grid grid-cols-2 gap-y-7 gap-x-10 lg:grid-cols-10">
-            <div className="col-span-2 flex font-bold text-white max-h-28">
-              <div className="flex flex-shrink-0 flex-row rounded-lg lg:flex-col my-auto w-full text-base gap-y-2 gap-x-3 text-center lg:text-left">
-                <span
-                  className="flex flex-1 justify-between rounded-xl p-2 lg:p-4 bg-red-500"
-                  onClick={() => setCategory("")}
-                >
-                  <span>All</span>
-                  <span className="text-red-800">{drivers.length}</span>
-                </span>
-                <span
-                  className="flex-1 rounded-xl p-2 lg:p-4 bg-red-500"
-                  onClick={() => setCategory("pro")}
-                >
-                  PRO
-                </span>
-                <span
-                  className="flex-1 rounded-xl p-2 lg:p-4 bg-red-500"
-                  onClick={() => setCategory("prospec")}
-                >
-                  PROSPEC
-                </span>
+            <div className="col-span-2 flex max-h-28">
+              <div className="flex flex-row lg:flex-col w-full gap-y-2 gap-x-3 text-center">
+                <FilterDriver />
+                <FilterDriver league="pro" />
+                <FilterDriver league="prospec" />
               </div>
             </div>
             <div className="col-span-2 lg:col-span-8 ">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
                 {sorted.map((item, id) => {
-                  return (
-                    <DriverCard
-                      key={id}
-                      name={item.name}
-                      team={item.team_name}
-                      number={item.driver_number}
-                      country={item.driver_country.url}
-                      driverImg={item.driver_img.url}
-                      slug={item.slug}
-                    />
-                  );
+                  return <DriverCard key={id} data={item} />;
                 })}
               </div>
             </div>

@@ -35,8 +35,8 @@ export const MainCard = ({ posts }) => {
             const url = item.thumbnail.url;
             return (
               <Link
-                as={`/article/${item.slug}`}
-                href="/article/[slug]"
+                as={`/news/${item.slug}`}
+                href="/news/[slug]"
                 passHref={true}
                 key={id}
               >
@@ -86,8 +86,8 @@ export const SubCard = ({ posts }) => {
             .map((item, id) => {
               return (
                 <Link
-                  as={`/article/${item.slug}`}
-                  href="/article/[slug]"
+                  as={`/news/${item.slug}`}
+                  href="/news/[slug]"
                   passHref={true}
                   key={id}
                 >
@@ -135,22 +135,18 @@ export const EmptyCard = () => {
   );
 };
 
-export const DriverCard = ({
-  name,
-  number,
-  country,
-  driverImg,
-  slug,
-  team,
-}) => {
+export const DriverCard = ({ data }) => {
+  const test = data.driver_country.url;
   return (
-    <Link as={`/drivers/${slug}`} href="/drivers/[driver]" passHref={true}>
+    <Link as={`/drivers/${data.slug}`} href="/drivers/[driver]" passHref={true}>
       <div className="flex-1 min-w-[26ch] md:min-w-[50ch] lg:min-w-[27ch] bg-gray-100 rounded-md drop-shadow-sm cursor-pointer">
         <div className="p-4">
-          <div className="flex items-center">
-            <Image width="20" height="20" src={country} alt="test" />
-            <span className="mx-7">{name}</span>
-            <span className="ml-auto font-medium text-gray-300">{number}</span>
+          <div className="relative flex items-center">
+            <Image width="20" height="20" src={test} alt="test" />
+            <span className="mx-7">{data.name}</span>
+            <span className="ml-auto font-medium text-gray-300">
+              {data.number}
+            </span>
           </div>
         </div>
       </div>
@@ -206,6 +202,40 @@ export const OverviewCard = ({ data }) => {
           </div>
         );
       })}
+    </div>
+  );
+};
+
+export const ArticleCard = ({ posts, id }) => {
+  return (
+    <div className="mb-14 flex flex-col md:flex-row w-full">
+      <Link
+        as={`/news/${posts.slug}`}
+        href="/news/[slug]"
+        passHref={true}
+        key={id}
+      >
+        <a className="w-full text-gray-500 sm:w-1/2 lg:w-1/2 container">
+          <h3 className="text-2xl text-gray-600">{posts.title}</h3>
+          <p className="text-sm my-1">
+            <span>{moment(posts.published_at).format("Do MMMM YYYY")}</span>
+            <span> - </span>
+            <span>{posts.duration}</span>
+          </p>
+          <p>{_.truncate(posts.content, { length: 84, seperator: /,? +/ })}</p>
+          <p className="text-base my-2 underline hover:text-gray-800 transition-colors">
+            Read more
+          </p>
+        </a>
+      </Link>
+      <div className="relative flex flex-shrink-0 w-full lg:w-1/2 h-[220px] md:h-[230px]">
+        <Image
+          className="relative h-full w-full object-cover rounded"
+          layout="fill"
+          src={posts.thumbnail.url}
+          alt={posts.title}
+        />
+      </div>
     </div>
   );
 };
