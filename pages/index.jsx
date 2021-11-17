@@ -1,17 +1,16 @@
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import moment from "moment";
+import { fetchAPI } from "../lib/api";
 import {
   MainCard,
   SubCard,
-  NewsLink,
   Typography,
   Seo,
   DriverStandingHome,
   Layout,
+  Calendar,
 } from "../components";
-import Calendar from "../components/ui/Calendar";
-import { fetchAPI } from "../lib/api";
 
 export default function Home({ posts, drivers, schedules }) {
   let date = new Date().toISOString();
@@ -19,7 +18,6 @@ export default function Home({ posts, drivers, schedules }) {
   const sortedArray = test.sort(
     (a, b) => new moment(a.started_at) - new moment(b.started_at)
   );
-  console.log(sortedArray[0]);
   return (
     <Layout>
       <section className="relative">
@@ -50,7 +48,7 @@ export default function Home({ posts, drivers, schedules }) {
                   <Typography type="primary" size="lg">
                     Standings
                   </Typography>
-                  <div className="h-1 bg-gray-100 w-2/3 md:w-9/12"></div>
+                  <div className="h-1 bg-gray-100 w-2/3 md:w-9/12 lg:w-4/12"></div>
                 </div>
                 <DriverStandingHome drivers={drivers} />
               </div>

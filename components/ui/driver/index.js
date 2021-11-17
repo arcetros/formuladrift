@@ -1,4 +1,5 @@
 export * from "./Stats";
 export * from "./Name";
-export * from "./DriverImage.jsx";
-export * from "./DriverStandingHome.jsx";
+export * from "./DriverImage";
+export * from "./DriverStandingHome";
+export * from "./Wins";

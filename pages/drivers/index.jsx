@@ -2,8 +2,8 @@ import { useState } from "react";
 import _ from "lodash";
 import { useQuery, useQueryClient } from "react-query";
 import {
-  DriverListModal,
   DriverCard,
+  DriverListModal,
   DriverNavigation,
   Layout,
 } from "../../components";

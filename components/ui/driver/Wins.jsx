@@ -1,11 +1,8 @@
 import moment from "moment";
 import { motion } from "framer-motion";
-import { DotIcon } from "./icons";
-import Image from "./Image";
-import { Typography } from "./Typography";
-import { dropIn } from "./animations";
-import Button from "./ui/button/";
-import { DriverListCard } from "./Card";
+import { Typography } from "../../Typography";
+import { dropIn } from "../../animations/";
+import Button from "../button/";
 
 export const FullModal = ({ children }) => {
   return (
@@ -22,7 +19,7 @@ export const FullModal = ({ children }) => {
   );
 };
 
-export const Modal = ({ handleClose, data, driver }) => {
+export const WinsModal = ({ handleClose, data, driver }) => {
   return (
     <FullModal>
       <div className="flex justify-between items-center pb-5">
@@ -80,55 +77,5 @@ export const Modal = ({ handleClose, data, driver }) => {
         )}
       </div>
     </FullModal>
-  );
-};
-
-export const DriverListModal = ({ handleClose, content, drivers }) => {
-  return (
-    <FullModal>
-      <div className="flex justify-between">
-        <div className="font-bold flex items-center text-white text-2xl space-x-2">
-          <span>PRO</span>
-          <span>/</span>
-          <span className="text-gray-200">AM</span>
-        </div>
-        <Button
-          onHandle={handleClose}
-          type="primarywhite"
-          className="flex items-center py-2 px-3"
-          icon="ReturnIcon"
-        >
-          <p className="font-bold text-gray-800 mx-2">RETURN</p>
-        </Button>
-      </div>
-      <div className="grid grid-cols-1 my-5 gap-2">
-        <DriverListCard drivers={drivers} />
-      </div>
-    </FullModal>
-  );
-};
-
-export const DriverNavigation = ({ currentDriver, totalDriver, setPaper }) => {
-  return (
-    <div className="z-20 flex justify-between py-4 px-4 bg-red-500 w-full">
-      <div className="font-bold text-2xl text-gray-100 lg:hidden">
-        {1 + currentDriver}
-        <span className="text-gray-200"> / {totalDriver}</span>
-      </div>
-      <div
-        className="flex items-center bg-white px-3 rounded-lg font-bold text-sm text-gray-800 lg:hidden"
-        onClick={() => setPaper(true)}
-      >
-        <DotIcon />
-        <span className="mx-1">SEE ALL</span>
-      </div>
-      <div className="hidden lg:flex">
-        <div className="font-bold flex items-center text-white text-2xl space-x-2">
-          <span>PRO</span>
-          <span>/</span>
-          <span className="text-gray-200">AM</span>
-        </div>
-      </div>
-    </div>
   );
 };

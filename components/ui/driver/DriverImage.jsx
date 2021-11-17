@@ -1,15 +1,15 @@
-import { ImgContainer, Img } from "../../Image";
+import Image from "next/image";
 
 export const DriverImage = (props) => {
   const { url, name } = props;
   return (
-    <ImgContainer className="relative h-[300px]  md:mb-6">
-      <Img
+    <div className="relative h-[300px]  md:mb-6">
+      <Image
         layout="fill"
         src={url}
         alt={name}
-        styles="object-contain md:object-scale-down w-full lg:col-span-2"
+        className="object-contain md:object-scale-down w-full lg:col-span-2"
       />
-    </ImgContainer>
+    </div>
   );
 };

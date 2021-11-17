@@ -1,5 +1,6 @@
 import Image from "next/image";
 import _ from "lodash";
+
 export const DriverStandingHome = ({ drivers }) => {
   return (
     <div className="flex flex-col">

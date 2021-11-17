@@ -8,7 +8,12 @@ const Footer = () => {
         <div className="grid grid-cols-12 gap-8 py-8 md:py-12 border-t border-gray-200">
           {/* First Block */}
           <div className="col-span-11 lg:col-span-3">
-            <Image src="/logo-formula_drift.svg" height={43} width={143} />
+            <Image
+              src="/logo-formula_drift.svg"
+              height={43}
+              width={143}
+              alt="Formula Drift Logo"
+            />
             <div className="text-sm text-gray-600">
               <span className="hover:text-gray-900 hover:underline transition duration-150 ease-in-out">
                 Terms

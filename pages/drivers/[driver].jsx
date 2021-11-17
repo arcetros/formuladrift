@@ -7,7 +7,7 @@ import {
   Return,
   TitleIcon,
   Typography,
-  Modal,
+  WinsModal,
   Stats,
   Name,
   DriverImage,
@@ -83,7 +83,7 @@ export default function Driver({ driver }) {
         )}
       </section>
       {toggleModal && (
-        <Modal handleClose={close} data={driver} driver={driver.slug} />
+        <WinsModal handleClose={close} data={driver} driver={driver.slug} />
       )}
     </Layout>
   );

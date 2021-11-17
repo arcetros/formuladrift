@@ -21,11 +21,3 @@ export const Layout = ({ children, route, styles }) => {
     </div>
   );
 };
-
-export const SubLayout = ({ children }) => {
-  return (
-    <div className="grid justify-items-stretch lg:justify-center md:px-24 lg:pt-24">
-      {children}
-    </div>
-  );
-};

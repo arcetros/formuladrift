@@ -2,8 +2,7 @@ import Image from "next/image";
 import moment from "moment";
 import Countdown, { zeroPad } from "react-countdown";
 
-const Calendar = ({ item }) => {
-  console.log(item);
+export const Calendar = ({ item }) => {
   return (
     <div className="bg-gray-900 rounded shadow-md flex flex-col justify-between h-full">
       <div className="w-full bg-gray-800 h-12 relative rounded-t">
@@ -87,5 +86,3 @@ const Calendar = ({ item }) => {
     </div>
   );
 };
-
-export default Calendar;

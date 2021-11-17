@@ -1,7 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
-import Link from "next/link";
 import { Disclosure, Popover, Transition } from "@headlessui/react";
-import Icon from "./ui/icon/";
+import Link from "next/link";
 import { HamburgerIcon, XIcon, FDLogo } from "./ui/icon/icons";
 import { paths } from "../utils/navPaths";
 
