@@ -2,7 +2,7 @@ import Image from "next/image";
 import { marked } from "marked";
 import moment from "moment";
 import { fetchAPI } from "../../lib/api";
-import { Layout, EmptyCard } from "../../components";
+import { Layout } from "../../components";
 
 export default function Article({ posts, publishedDate }) {
   return (
@@ -19,7 +19,7 @@ export default function Article({ posts, publishedDate }) {
               />
             </div>
           ) : (
-            <EmptyCard />
+            "Loading"
           )}
           <div className="mt-14 lg:mt-32 font-light w-full text-black text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4">

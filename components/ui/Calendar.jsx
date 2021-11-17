@@ -11,12 +11,14 @@ export const Calendar = ({ item }) => {
       <div className="min-h-[30ch]">
         <div className="mx-auto p-7">
           <div className="relative flex flex-col flex-shrink-1 h-[200px] w-auto">
-            <Image
-              layout="fill"
-              src={item.track.track_logo.url}
-              alt={item.track.track_name}
-              className="object-contain w-full"
-            />
+            {item.track.track_logo && (
+              <Image
+                layout="fill"
+                src={item.track.track_logo.url}
+                alt={item.track.track_name}
+                className="object-contain w-full"
+              />
+            )}
           </div>
           <div className="flex w-full">
             <div className="mx-auto bg-red-600 px-6 py-3 text-white font-medium rounded">

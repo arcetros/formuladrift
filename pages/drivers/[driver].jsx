@@ -59,13 +59,15 @@ export default function Driver({ driver }) {
         <div className="mb-4 md:col-span-10 lg:col-span-7">
           {accordionMenu.menu.map((item, id) => {
             return (
-              <DriverAccordion
-                key={id}
-                expanded={expanded}
-                setExpanded={setExpanded}
-                title={item[0]}
-                content={item[1]}
-              />
+              <div key={id} className="mt-2">
+                <DriverAccordion
+                  i={id}
+                  expanded={expanded}
+                  setExpanded={setExpanded}
+                  title={item[0]}
+                  content={item[1]}
+                />
+              </div>
             );
           })}
         </div>
