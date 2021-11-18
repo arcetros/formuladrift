@@ -74,7 +74,7 @@ export default function Header() {
                   </div>
                   <div>
                     <Link as="/news" href="/news" passHref={true}>
-                      <a className="px-3 py-2 rounded font-medium text-md text-gray-500">
+                      <a className="px-3 py-1 rounded font-medium text-md text-gray-500">
                         News
                       </a>
                     </Link>

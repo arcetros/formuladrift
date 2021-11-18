@@ -1,7 +1,7 @@
 export const TypographyType = {
   primary: "font-bold text-gray-800",
   primarywhite: "font-bold text-white",
-  sub: "font-medium text-gray-400",
+  sub: "font-medium text-gray-800",
   subWhite: "text-gray-100",
   mainLink: "font-medium text-gray-800",
   subLink: "font-bold text-gray-500",

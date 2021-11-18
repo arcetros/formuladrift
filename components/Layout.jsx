@@ -7,14 +7,14 @@ export const Layout = ({ children, route, styles }) => {
     exit: { opacity: 0, x: 0, y: -100 },
   };
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="flex flex-col overflow-hidden">
       <motion.main
         variants={variants}
         initial="hidden"
         animate="enter"
         exit="exit"
         transition={{ type: "linear" }}
-        className="flex-grow mx-auto pt-24"
+        className=" mx-auto pt-24"
       >
         {children}
       </motion.main>
