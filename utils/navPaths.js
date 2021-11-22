@@ -1,12 +1,27 @@
 export const paths = [
   {
-    name: "Home",
-    description: "Home page",
+    name: "CALENDAR",
+    description: "Current / absolute drivers standing",
     path: "/",
   },
   {
-    name: "Driver List",
-    description: "See all PRO/AM Drivers",
+    name: "DRIVERS",
+    description: "Current / absolute drivers standing",
     path: "/drivers",
+  },
+  {
+    name: "PRO",
+    description: "Current / absolute drivers standing",
+    path: "/",
+  },
+  {
+    name: "PROSPEC",
+    description: "Current / absolute drivers standing",
+    path: "/",
+  },
+  {
+    name: "FD Japan",
+    description: "Current / absolute drivers standing",
+    path: "/",
   },
 ];

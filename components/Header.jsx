@@ -16,41 +16,49 @@ export default function Header() {
   }, [top]);
 
   return (
-    <header
-      className={`fixed w-full z-30 ${
-        !top && "bg-white bg-opacity-95 shadow-md"
-      }`}
-    >
-      <Disclosure as="nav" className={top && "bg-white"}>
+    <header className={`fixed w-full bg-gray-800 z-30`}>
+      <Disclosure as="nav" className={top && "bg-gray-800"}>
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-6xl px-5 md:px-2">
+            <div className="max-w-6xl px-4 md:px-2">
               <div className="flex justify-between items-center">
                 <div className="h-20 flex items-center">
                   <div className="flex-shrink-0 lg:hidden">
-                    <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 ">
                       <span className="sr-only">Open main menu</span>
-                      {open ? <XIcon /> : <HamburgerIcon />}
+                      {open ? (
+                        <XIcon styles="text-white w-10 h-10" />
+                      ) : (
+                        <HamburgerIcon styles="text-white w-10 h-10" />
+                      )}
                     </Disclosure.Button>
                   </div>
                 </div>
-                <div className="order-first cursor-pointer flex items-center">
+                <div className="px-5 hidden lg:flex justify-between items-center">
+                  <HamburgerIcon styles="text-white w-10 h-10" />
+                </div>
+                <div className="order-first md:order-none mr-auto cursor-pointer flex items-center">
                   <Link as="/" href="/" passHref={true}>
-                    <div>
+                    <div className="">
                       <FDLogo />
                     </div>
                   </Link>
-                </div>
-                <div className="hidden lg:flex z-40 items-center">
-                  <div className="">
+                  <div className="hidden lg:flex z-40 items-center ml-2">
+                    <Link as="/news" href="/news" passHref={true}>
+                      <div className="px-3 py-7 font-bold text-md text-white group hover:bg-red-500 transition duration-150">
+                        NEWS
+                      </div>
+                    </Link>
                     <Popover className="relative">
-                      <Popover.Button className="px-3 py-2 rounded font-medium text-md text-gray-500 group">
-                        Championship
+                      <Popover.Button
+                        className={`px-3 py-7 font-bold text-md text-white group hover:bg-red-500 transition duration-150`}
+                      >
+                        CHAMPIONSHIP
                       </Popover.Button>
-                      <Popover.Panel className="absolute z-10 w-screen px-4 max-w-xs -left-4">
+                      <Popover.Panel className="absolute z-10 w-screen top-[4.88rem] left-[-20.3rem] border-t-2 border-gray-700">
                         {({ close }) => (
-                          <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                            <div className="relative grid gap-8 bg-white p-7 grid-cols-1">
+                          <div className="overflow-hidden shadow-lg ring-1 ring-black ring-opacity-5">
+                            <div className="relative flex gap-x-8 bg-gray-800 p-7">
                               {paths.map((item, id) => (
                                 <Link
                                   href={item.path}
@@ -60,9 +68,9 @@ export default function Header() {
                                 >
                                   <div
                                     onClick={async () => close()}
-                                    className="z-0 w-full"
+                                    className="z-0 min-w-[13rem] xl:max-w-[23rem] 2xl:max-w-[32rem] flex-shrink 2xl:flex-grow py-24"
                                   >
-                                    <a className="w-full">{item.name}</a>
+                                    <a className="">{item.name}</a>
                                   </div>
                                 </Link>
                               ))}
@@ -72,13 +80,6 @@ export default function Header() {
                       </Popover.Panel>
                     </Popover>
                   </div>
-                  <div>
-                    <Link as="/news" href="/news" passHref={true}>
-                      <a className="px-3 py-1 rounded font-medium text-md text-gray-500">
-                        News
-                      </a>
-                    </Link>
-                  </div>
                 </div>
               </div>
             </div>
@@ -86,7 +87,7 @@ export default function Header() {
             {/* Mobile View */}
             <Disclosure.Panel className="lg:hidden">
               {({ close }) => (
-                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <div className="pt-2">
                   {paths.map((item, id) => (
                     <Link
                       href={item.path}
@@ -94,8 +95,11 @@ export default function Header() {
                       className="z-10"
                       key={id}
                     >
-                      <div onClick={async () => close()} className="z-0 w-full">
-                        <a className="text-gray-900 block px-3 py-2 rounded-md text-base font-medium">
+                      <div
+                        onClick={async () => close()}
+                        className="z-0 w-full bg-gray-700"
+                      >
+                        <a className="text-white block px-3 py-3.5 text-sm font-semibold border-b border-gray-600">
                           {item.name}
                         </a>
                       </div>

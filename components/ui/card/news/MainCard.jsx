@@ -21,7 +21,7 @@ export const MainCard = ({ posts }) => {
                 key={id}
               >
                 <div className="flex flex-col items-stretch min-h-full shadow-xl">
-                  <div className="flex-shrink-1 h-[250px] md:h-[500px] w-auto relative">
+                  <div className="flex-shrink-1 h-[250px] md:h-[500px] w-full relative">
                     <Image
                       layout="fill"
                       src={url}

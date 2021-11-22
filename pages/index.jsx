@@ -24,7 +24,7 @@ export default function Home({ posts, drivers, schedules }) {
       <Layout>
         <section className="relative">
           <div className="md:max-w-6xl mx-auto md:px-4 px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-10 gap-x-14 gap-y-5 my-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-10 gap-x-8 gap-y-5 my-3">
               <div className="md:col-span-10 lg:col-span-7">
                 <MainCard posts={posts} />
               </div>
