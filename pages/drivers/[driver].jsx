@@ -43,13 +43,27 @@ export default function Driver({ driver }) {
   return (
     <div className="flex flex-col overflow-hidden">
       <main
-        className="pt-24
+        className="pt-[5rem]
       md:mx-auto shadow-lg mb-8 pb-4"
       >
-        <section className="md:grid md:grid-cols-10 lg:mt-12 md:gap-x-10 min-w-xl">
-          <div className="flex flex-col md:flex-row items-center px-0 md:px-36 col-span-10">
-            <DriverImage url={driver.driver_img.url} name={driver.name} />
-            <Name driver={driver} />
+        <section className="md:grid md:grid-cols-10 md:gap-x-10 min-w-xl">
+          <div className="lg:pt-12 col-span-10 bg-gray-900 lg:min-h-[23rem]">
+            <div className="relative mb-4 md:mb-0">
+              <div className="h-full w-3 bg-red-500 absolute"></div>
+              <div className="flex px-4 py-3 bg-gray-800 w-full lg:w-[20%]">
+                <span className="mx-auto text-white text-lg font-bold italic ">
+                  2021 PRO DRIVERS
+                </span>
+              </div>
+            </div>
+            <div className="relative flex flex-col md:flex-row px-0 md:px-36">
+              <DriverImage
+                url={driver.driver_img.url}
+                name={driver.name}
+                number={driver.driver_number}
+              />
+              <Name driver={driver} />
+            </div>
           </div>
           <div className="md:my-auto md:col-span-4 lg:col-span-6"></div>
           <div className="col-span-10 lg:mb-12">
@@ -60,9 +74,9 @@ export default function Driver({ driver }) {
               About Driver
             </Typography>
           </div>
-          <section className="md:px-4 mb-4 md:col-span-10 lg:col-span-10 mt-6 font-light leading-relaxed px-8 lg:px-36">
+          <section className="mb-4 md:col-span-10 lg:col-span-10 mt-6 font-light leading-relaxed px-8 md:px-36">
             <article
-              className="prose prose-sm lg:prose-xl"
+              className="prose prose-sm md:prose-lg lg:prose-xl mx-auto"
               dangerouslySetInnerHTML={{ __html: marked(driver.biography) }}
             />
           </section>

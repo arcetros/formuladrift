@@ -11,7 +11,7 @@ const Item = ({ data, title, handleEvent, position, iconType }) => {
   return (
     <div
       onClick={handleEvent}
-      className="flex items-center bg-coral-900 rounded-full px-4 h-10 min-w-[6rem]"
+      className="flex items-center bg-coral-500 rounded-full px-4 h-10 min-w-[6rem]"
     >
       <div className="flex flex-row items-center gap-x-4 mx-auto">
         {iconType && <Icon type={iconType} />}
@@ -29,7 +29,7 @@ export const Stats = (props) => {
   const { driver, event } = props;
 
   return (
-    <div className="flex justify-between mb-10 md:mb-8 bg-coral-500 p-4 md:rounded">
+    <div className="flex justify-between mb-10 md:mb-8 bg-gray-800 border-t border-gray-700 p-4">
       <div className="flex gap-x-4">
         <Item
           data={driver.victories.length}
