@@ -1,3 +1,3 @@
-import DriverAccordion from "./DriverAccordion";
+import DriverAccordion from './DriverAccordion'
 
-export { DriverAccordion };
+export { DriverAccordion }

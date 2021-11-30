@@ -1,11 +1,17 @@
-import * as allIcon from "./icons";
+import * as allIcon from './icons'
 
 const Index = (props) => {
-  const icons = allIcon;
-  const { type } = props;
-  const Icon = icons[type];
+    const { UserIcon } = allIcon
+    const icons = allIcon
+    const { type } = props
 
-  return <Icon {...props} />;
-};
+    const empty = () => {
+        return <UserIcon />
+    }
 
-export default Index;
+    const Icon = icons[type] ? icons[type] : empty
+
+    return <Icon {...props} />
+}
+
+export default Index
