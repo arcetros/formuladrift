@@ -29,7 +29,7 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         'jsx-a11y/anchor-is-valid': 'off',
         'jsx-a11y/no-onchange': 'off',
-        'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+        'prettier/prettier': ['off', { singleQuote: true }, { usePrettierrc: true }],
       },
     },
   ],
