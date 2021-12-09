@@ -5,42 +5,40 @@ import moment from 'moment'
 import { fetchAPI } from '../../lib/api'
 import { Layout, Typography, SubCard } from '../../components'
 
-export default function Article({ posts, otherPosts, publishedDate }) {
+export default function Article({ posts, otherPosts }) {
   const currentExcluded = _.shuffle(otherPosts).filter((item) => item.id != posts.id)
   const shuffleArray = currentExcluded.sort(() => 0.5 - Math.random()).slice(0, 2)
   return (
     <Layout>
-      <section className="relative shadow-md pb-6 mb-4">
-        <div className="max-w-6xl">
-          <div className="mx-8 lg:mx-0 lg:px-[14.4rem]">
-            <div className="leading-relaxed my-6 text-gray-600">
-              <span className="font-bold">{moment(posts.created_at).format('dddd')}</span>
-              <span> | </span>
-              <span>{publishedDate}</span>
-            </div>
-            <h1 className="font-bold text-4xl md:text-5xl lg:text-4xl mb-4">{posts.title}</h1>
-          </div>
-          {posts ? (
-            <div className="relative mt-8 h-56 lg:h-[25rem]">
-              <Image
-                layout="fill"
-                src={posts.thumbnail.url}
-                alt={posts.title}
-                className="object-cover"
-              />
-            </div>
-          ) : (
-            'Loading'
-          )}
-          <div className="mt-14 font-light w-full text-black text-center"></div>
-          <section className="mt-6 font-light leading-relaxed px-8 lg:px-16">
-            <article
-              className="prose md:prose-md mx-auto"
-              dangerouslySetInnerHTML={{ __html: marked(posts.content) }}
-            />
-          </section>
+      <div className="mx-8 lg:mx-0 text-white mt-32">
+        <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-4xl mb-1">
+          {posts.title}
+        </h1>
+        <div className="font-secondary leading-relaxed mb-6">
+          <p className="font-bold">{moment(posts.created_at).format('LL')}</p>
         </div>
-      </section>
+      </div>
+      <div className="border border-white">
+        {posts ? (
+          <div className="relative h-56 lg:h-[25rem]">
+            <Image
+              layout="fill"
+              src={posts.thumbnail.url}
+              alt={posts.title}
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          'Loading'
+        )}
+        <div className="mt-14 font-light w-full text-black text-center"></div>
+        <section className="mt-6 font-light leading-relaxed">
+          <article
+            className="prose md:prose-xl mx-auto text-white"
+            dangerouslySetInnerHTML={{ __html: marked(posts.content) }}
+          />
+        </section>
+      </div>
       <section className="relative">
         <div className="my-6 mx-4 lg:mx-0">
           <div className="relative flex items-center mb-6">

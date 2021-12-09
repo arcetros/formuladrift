@@ -10,17 +10,26 @@ body {
   overflow-x: hidden;
 }
 
-tr {
-  border-top: 1px solid #c6cbd1;
-  background: #fff;
+/* width */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
 }
 
-th,
-td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
 }
 
-table tr:nth-child(2n) {
-  background: #f6f8fa;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
 }

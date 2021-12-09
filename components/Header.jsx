@@ -1,123 +1,136 @@
-import { useState, useEffect, Fragment } from 'react'
-import { Disclosure, Popover } from '@headlessui/react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { HamburgerIcon, XIcon, FDLogo } from './ui/icon/icons'
-import { paths, mobilePaths } from '../utils/navPaths'
+import Icon from '/components/ui/icon/'
+
+let socials = [
+  { name: 'instagram', href: 'https://www.instagram.com/formulad/' },
+  { name: 'youtube', href: 'https://www.youtube.com/Formuladrift' },
+  { name: 'facebook', href: 'https://www.facebook.com/FormulaDRIFT/?ref=ts' },
+  { name: 'twitter', href: 'https://twitter.com/FormulaDrift' },
+]
+
+const SocialsIcon = ({ name, href }) => {
+  return (
+    <Link key={name} href={href} passHref={true}>
+      <a target="_blank">
+        <Icon type={name} />
+      </a>
+    </Link>
+  )
+}
+
+const Item = ({ header, items }) => {
+  const [toggle, setToggle] = useState(false)
+  const toggleClass = () => {
+    setToggle(!toggle)
+  }
+  return (
+    <>
+      <li onClick={() => toggleClass()} aria-hidden={true}>
+        {header}
+      </li>
+      {toggle && (
+        <ul>
+          {items.map((item, id) => {
+            return (
+              <li className="mx-2 text-gray-400 text-base my-1" key={id}>
+                {item}
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </>
+  )
+}
+
+const Menu = ({ setShowMenu }) => {
+  return (
+    <motion.div
+      className="z-20 bg-[#111] w-96 absolute right-48 top-0 h-screen"
+      animate={{ x: 192 }}
+      transition={{ duration: 0.2, type: 'tween' }}
+      initial={{ x: 500 }}
+      exit={{ x: 700 }}
+    >
+      <div className="flex flex-col mx-6 h-full">
+        <div className="relative justify-between flex items-center mt-4">
+          <Icon type="FDLogo" />
+          <div
+            className="text-white cursor-pointer"
+            onClick={() => setShowMenu(false)}
+            aria-hidden={true}
+          >
+            <Icon type="XIcon" />
+          </div>
+        </div>
+        <div className="overflow-auto whitespace-nowrap mb-12 mt-4 scrollbar-thin scrollbar-thumb-gray-400">
+          <div className="">
+            <ul className="font-primary font-extrabold flex flex-col uppercase text-lg text-white gap-y-2">
+              <Item
+                header="Championship"
+                items={['Drivers & Teams', 'PRO', 'PROSPEC', 'FD-JAPAN']}
+              />
+              <li>News</li>
+              <li>Store</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+              <li>Partners</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex items-center gap-x-4 mb-8">
+          {socials.map(({ name, href }) => {
+            return <SocialsIcon key={name} name={name} href={href} />
+          })}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function Header() {
-    const [top, setTop] = useState(true)
-
-    useEffect(() => {
-        const scrollHandler = () => {
-            window.pageYOffset > 10 ? setTop(false) : setTop(true)
-        }
-
-        window.addEventListener('scroll', scrollHandler)
-        return () => window.removeEventListener('scroll', scrollHandler)
-    }, [top])
-
-    return (
-        <header className={`fixed w-full bg-gray-800 z-30`}>
-            <Disclosure as="nav" className={top && 'bg-gray-800'}>
-                {({ open }) => (
-                    <>
-                        <div className="max-w-6xl px-4 md:px-2">
-                            <div className="flex justify-between items-center">
-                                <div className="h-20 flex items-center">
-                                    <div className="flex-shrink-0 lg:hidden">
-                                        <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 ">
-                                            <span className="sr-only">Open main menu</span>
-                                            {open ? (
-                                                <XIcon styles="text-white w-10 h-10" />
-                                            ) : (
-                                                <HamburgerIcon styles="text-white w-10 h-10" />
-                                            )}
-                                        </Disclosure.Button>
-                                    </div>
-                                </div>
-                                <div className="px-5 hidden lg:flex justify-between items-center">
-                                    <HamburgerIcon styles="text-white w-10 h-10" />
-                                </div>
-                                <div className="order-first md:order-none mr-auto cursor-pointer flex items-center">
-                                    <Link as="/" href="/" passHref={true}>
-                                        <div className="">
-                                            <FDLogo />
-                                        </div>
-                                    </Link>
-                                    <div className="hidden lg:flex z-40 items-center ml-2">
-                                        <Link as="/news" href="/news" passHref={true}>
-                                            <div className="px-3 py-7 font-bold text-md text-white group hover:bg-red-500 transition duration-150">
-                                                NEWS
-                                            </div>
-                                        </Link>
-                                        <Popover className="relative">
-                                            <Popover.Button
-                                                className={`px-3 py-7 font-bold text-md text-white group hover:bg-red-500 transition duration-150`}
-                                            >
-                                                CHAMPIONSHIP
-                                            </Popover.Button>
-                                            <Popover.Panel className="absolute z-10 w-screen top-[4.88rem] left-[-20.3rem] border-t-2 border-gray-700">
-                                                {({ close }) => (
-                                                    <div className="overflow-hidden shadow-lg ring-1 ring-black ring-opacity-5">
-                                                        <div className="relative flex gap-x-8 bg-gray-800 p-7">
-                                                            {paths.map((item, id) => (
-                                                                <Link
-                                                                    href={item.path}
-                                                                    passHref={true}
-                                                                    className="z-10"
-                                                                    key={id}
-                                                                >
-                                                                    <div
-                                                                        onClick={async () =>
-                                                                            close()
-                                                                        }
-                                                                        aria-hidden="true"
-                                                                        className="z-0 min-w-[13rem] xl:max-w-[23rem] 2xl:max-w-[32rem] flex-shrink 2xl:flex-grow py-24"
-                                                                    >
-                                                                        <a className="">
-                                                                            {item.name}
-                                                                        </a>
-                                                                    </div>
-                                                                </Link>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </Popover.Panel>
-                                        </Popover>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Mobile View */}
-                        <Disclosure.Panel className="lg:hidden">
-                            {({ close }) => (
-                                <div className="pt-2">
-                                    {mobilePaths.map((item, id) => (
-                                        <Link
-                                            href={item.path}
-                                            passHref={true}
-                                            className="z-10"
-                                            key={id}
-                                        >
-                                            <div
-                                                onClick={async () => close()}
-                                                className="z-0 w-full bg-gray-700"
-                                                aria-hidden="true"
-                                            >
-                                                <a className="text-white block px-3 py-3.5 text-sm font-semibold border-b border-gray-600">
-                                                    {item.name}
-                                                </a>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
-                        </Disclosure.Panel>
-                    </>
-                )}
-            </Disclosure>
-        </header>
-    )
+  const [showMenu, setShowMenu] = useState(false)
+  return (
+    <div className="w-full fixed top-0 z-50">
+      <div className="max-w-[135rem] mx-auto flex justify-between py-6 px-8 md:px-16 items-center">
+        <div className="bg-red-500 px-4 py-3.5">
+          <Link href="/" className="">
+            <a className="font-primary text-xl font-bold text-white">FD</a>
+          </Link>
+        </div>
+        <div className="relative text-white text-lg">
+          <div className="cursor-pointer" onClick={() => setShowMenu(true)} aria-hidden={true}>
+            <Icon type="HamburgerIcon" />
+          </div>
+          <div className="hidden md:block absolute left-[5px] top-24 z-10">
+            <div className="flex flex-col items-center gap-y-5">
+              {socials.map(({ name, href }) => {
+                return <SocialsIcon key={name} name={name} href={href} />
+              })}
+            </div>
+          </div>
+        </div>
+        <AnimatePresence>
+          {showMenu && (
+            <div className="absolute inset-0 w-full h-screen z-10" aria-hidden={true}>
+              <div className="w-full h-screen" onClick={() => setShowMenu(false)} aria-hidden></div>
+              <Menu setShowMenu={setShowMenu} />
+            </div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  )
 }
