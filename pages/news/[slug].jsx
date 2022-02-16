@@ -10,48 +10,62 @@ export default function Article({ posts, otherPosts }) {
   const shuffleArray = currentExcluded.sort(() => 0.5 - Math.random()).slice(0, 2)
   return (
     <Layout>
-      <div className="mx-8 lg:mx-0 text-white mt-32">
-        <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-4xl mb-1">
-          {posts.title}
-        </h1>
-        <div className="font-secondary leading-relaxed mb-6">
-          <p className="font-bold">{moment(posts.created_at).format('LL')}</p>
+      <div className="relative max-w-[105rem] flex flex-col mx-auto w-full">
+        <div className="mx-0 lg:mx-44">
+          <div className="mx-4 md:mx-16 lg:mx-0 text-white mt-20">
+            <h1 className="font-primary font-bold text-xl md:text-5xl lg:text-4xl mb-1">
+              {posts.title}
+            </h1>
+            <div className="font-primary leading-relaxed mb-8">
+              <p className="text-base md:text-lg font-light text-gray-500">
+                {moment(posts.created_at).format('LL')}
+              </p>
+            </div>
+            <div className="mb-6 flex items-center">
+              <p className="font-primary font-bold">TAGS: </p>
+              <div className="ml-1 px-1 bg-white text-gray-800 font-primary uppercase font-bold">
+                News
+              </div>
+              <div className="ml-1 px-1 bg-white text-gray-800 font-primary uppercase font-bold">
+                PRO
+              </div>
+            </div>
+          </div>
+          <div className="lg:border border-white">
+            {posts ? (
+              <div className="relative h-56 md:h-[25rem]">
+                <Image
+                  layout="fill"
+                  src={posts.thumbnail.url}
+                  alt={posts.title}
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              'Loading'
+            )}
+            <section className="font-primary my-16 mx-4 md:mx-16 lg:mx-0 leading-relaxed">
+              <article
+                className="prose prose-md md:prose-lg lg:prose-xl mx-auto text-white"
+                dangerouslySetInnerHTML={{ __html: marked(posts.content) }}
+              />
+            </section>
+          </div>
+          <section className="relative">
+            <div className="my-6 mx-4 lg:mx-0">
+              <div className="relative flex items-center mb-6">
+                <div className="w-2 h-full bg-red-500 absolute"></div>
+                <Typography size="lg" type="primary" styles="ml-4">
+                  More News
+                </Typography>
+              </div>
+              <div className="flex flex-col lg:flex-row">
+                <SubCard posts={shuffleArray} />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
-      <div className="border border-white">
-        {posts ? (
-          <div className="relative h-56 lg:h-[25rem]">
-            <Image
-              layout="fill"
-              src={posts.thumbnail.url}
-              alt={posts.title}
-              className="object-cover"
-            />
-          </div>
-        ) : (
-          'Loading'
-        )}
-        <div className="mt-14 font-light w-full text-black text-center"></div>
-        <section className="mt-6 font-light leading-relaxed">
-          <article
-            className="prose md:prose-xl mx-auto text-white"
-            dangerouslySetInnerHTML={{ __html: marked(posts.content) }}
-          />
-        </section>
-      </div>
-      <section className="relative">
-        <div className="my-6 mx-4 lg:mx-0">
-          <div className="relative flex items-center mb-6">
-            <div className="w-2 h-full bg-red-500 absolute"></div>
-            <Typography size="lg" type="primary" styles="ml-4">
-              More News
-            </Typography>
-          </div>
-          <div className="flex flex-col lg:flex-row">
-            <SubCard posts={shuffleArray} />
-          </div>
-        </div>
-      </section>
     </Layout>
   )
 }

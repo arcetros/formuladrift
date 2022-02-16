@@ -7,17 +7,25 @@ export const Layout = ({ children }) => {
     exit: { opacity: 0, x: 0, y: -100 },
   }
   return (
-    <div className="bg-gray-900 flex flex-col overflow-hidden top-0">
+    <div className="bg-[#111]">
       <motion.main
         variants={variants}
         initial="hidden"
         animate="enter"
         exit="exit"
         transition={{ type: 'linear' }}
-        className="max-w-[100rem] mx-auto"
+        className="flex flex-col mx-auto overflow-hidden"
       >
         {children}
       </motion.main>
+    </div>
+  )
+}
+
+export const HomeLayout = ({ children }) => {
+  return (
+    <div className="relative max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem] mx-auto">
+      <div className="mx-4 md:mx-12 lg:mx-0 xl:mx-44">{children}</div>
     </div>
   )
 }

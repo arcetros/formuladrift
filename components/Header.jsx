@@ -13,7 +13,7 @@ let socials = [
 const SocialsIcon = ({ name, href }) => {
   return (
     <Link key={name} href={href} passHref={true}>
-      <a target="_blank">
+      <a target="_blank" className="pointer-events-auto">
         <Icon type={name} />
       </a>
     </Link>
@@ -48,15 +48,17 @@ const Item = ({ header, items }) => {
 const Menu = ({ setShowMenu }) => {
   return (
     <motion.div
-      className="z-20 bg-[#111] w-96 absolute right-48 top-0 h-screen"
+      className="z-0 bg-[#111] w-full md:w-96 absolute right-48 top-0 h-screen"
       animate={{ x: 192 }}
       transition={{ duration: 0.2, type: 'tween' }}
       initial={{ x: 500 }}
       exit={{ x: 700 }}
     >
-      <div className="flex flex-col mx-6 h-full">
-        <div className="relative justify-between flex items-center mt-4">
-          <Icon type="FDLogo" />
+      <div className="flex flex-col mx-12 md:mx-6 h-full pointer-events-auto">
+        <div className="relative justify-between flex items-center mt-4 ">
+          <a href="/">
+            <Icon type="FDLogo" />
+          </a>
           <div
             className="text-white cursor-pointer"
             onClick={() => setShowMenu(false)}
@@ -83,14 +85,10 @@ const Menu = ({ setShowMenu }) => {
               <li>Partners</li>
               <li>Partners</li>
               <li>Partners</li>
-              <li>Partners</li>
-              <li>Partners</li>
-              <li>Partners</li>
-              <li>Partners</li>
             </ul>
           </div>
         </div>
-        <div className="flex items-center gap-x-4 mb-8">
+        <div className="flex gap-x-5 items-center mb-8">
           {socials.map(({ name, href }) => {
             return <SocialsIcon key={name} name={name} href={href} />
           })}
@@ -103,18 +101,29 @@ const Menu = ({ setShowMenu }) => {
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false)
   return (
-    <div className="w-full fixed top-0 z-50">
-      <div className="max-w-[135rem] mx-auto flex justify-between py-6 px-8 md:px-16 items-center">
-        <div className="bg-red-500 px-4 py-3.5">
+    <div className="w-full fixed top-0 z-[99] pointer-events-none">
+      <div className="min-w-full mx-auto flex justify-between py-2 lg:py-6 px-4 xl:px-16 items-center bg-gray-900 bg-opacity-95 lg:bg-none lg:bg-opacity-0 ">
+        <div className="bg-red-500 px-0.5 py-0.5 lg:px-2 lg:py-2.5">
           <Link href="/" className="">
-            <a className="font-primary text-xl font-bold text-white">FD</a>
+            <a className="font-primary text-base lg:text-xl font-bold text-white flex items-center pointer-events-auto">
+              FD
+            </a>
           </Link>
         </div>
-        <div className="relative text-white text-lg">
-          <div className="cursor-pointer" onClick={() => setShowMenu(true)} aria-hidden={true}>
+        <div className="hidden md:flex lg:hidden items-center gap-x-5">
+          {socials.map(({ name, href }) => {
+            return <SocialsIcon key={name} name={name} href={href} />
+          })}
+        </div>
+        <div className="relative text-white text-lg ">
+          <div
+            className="cursor-pointer pointer-events-auto"
+            onClick={() => setShowMenu(true)}
+            aria-hidden={true}
+          >
             <Icon type="HamburgerIcon" />
           </div>
-          <div className="hidden md:block absolute left-[5px] top-24 z-10">
+          <div className="hidden lg:block absolute left-[5px] top-24 z-10">
             <div className="flex flex-col items-center gap-y-5">
               {socials.map(({ name, href }) => {
                 return <SocialsIcon key={name} name={name} href={href} />
@@ -124,7 +133,10 @@ export default function Header() {
         </div>
         <AnimatePresence>
           {showMenu && (
-            <div className="absolute inset-0 w-full h-screen z-10" aria-hidden={true}>
+            <div
+              className="absolute inset-0 w-full h-screen z-40 pointer-events-auto"
+              aria-hidden={true}
+            >
               <div className="w-full h-screen" onClick={() => setShowMenu(false)} aria-hidden></div>
               <Menu setShowMenu={setShowMenu} />
             </div>
