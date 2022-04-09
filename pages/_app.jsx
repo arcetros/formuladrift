@@ -13,17 +13,12 @@ export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
   const { global } = pageProps
-
   return (
     <>
       <GlobalContext.Provider value={global}>
         <QueryClientProvider client={queryClient}>
           <Header />
-          <AnimatePresence
-            exitBeforeEnter
-            initial={false}
-            onExitComplete={() => window.scrollTo(0, 0)}
-          >
+          <AnimatePresence exitBeforeEnter initial={false}>
             <Component {...pageProps} />
           </AnimatePresence>
           <Footer />
