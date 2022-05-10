@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import moment from 'moment'
 import { Calendar } from '/components/'
+import Button from '../../ui/button'
 import Icon from '/components/ui/icon/'
 
 export const Schedule = ({ currentSchedule }) => {
@@ -8,9 +9,9 @@ export const Schedule = ({ currentSchedule }) => {
     <div className="bg-[#111]">
       <div className="max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem] w-full flex mx-auto my-12">
         <div className="mx-4 md:mx-12 lg:mx-0 xl:mx-44 w-full">
-          <div className="flex flex-col lg:flex-row gap-y-4 font-primary text-white font-bold text-lg lg:text-xl">
-            <div className="flex-col gap-y-4 w-full md:w-2/3 md:max-w-[30rem]">
-              <p>UPCOMING EVENT</p>
+          <div className="flex flex-col lg:flex-row gap-y-4 font-primary text-white pb-4 border-b border-gray-800">
+            <div className="flex-col gap-y-4 w-full md:w-2/3 md:max-w-[30rem] ">
+              <p className="font-bold text-xl lg:text-2xl">UPCOMING EVENT</p>
             </div>
             <div className="h-full my-auto lg:ml-auto w-full lg:w-1/3">
               <Calendar item={currentSchedule.started_at} />
@@ -60,12 +61,14 @@ export const Schedule = ({ currentSchedule }) => {
             </div>
           </div>
           <div className="flex relative w-full">
-            <div className="flex items-center justify-between border border-white px-5 py-3 mt-4 group hover:bg-white cursor-pointer transition ease-in-out duration-100">
-              <Icon type="MenuAlt1" />
-              <h1 className="ml-1 text-white group-hover:text-[#111] font-secondary font-normal text-xs md:text-sm">
+            <Button>
+              <span className="text-white group-hover:text-black">
+                <Icon type="MenuAlt1" />
+              </span>
+              <span className="text-white text-sm md:text-base font-secondary group-hover:text-[#111]">
                 MORE EVENTS
-              </h1>
-            </div>
+              </span>
+            </Button>
           </div>
         </div>
       </div>

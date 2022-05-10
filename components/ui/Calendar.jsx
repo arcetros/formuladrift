@@ -11,19 +11,19 @@ export const Calendar = ({ item }) => {
           <div className="flex gap-x-1 text-white font-mono leading-none ">
             <div className="flex-1 mx-auto text-white w-10 md:w-15 p-0 lg:p-1 flex justify-start lg:justify-evenly items-center gap-x-1 font-mono">
               <p className="text-sm">{zeroPad(props.days)}</p>
-              <p className="text-xs">days</p>
+              <p className="text-xs text-gray-400">days</p>
             </div>
-            <div className="flex-1 text-white w-10 w-15 p-0 lg:p-1 flex justify-start lg:justify-evenly items-center gap-x-1">
+            <div className="flex-1 w-10 w-15 p-0 lg:p-1 flex justify-start lg:justify-evenly items-center gap-x-1">
               <p className="text-sm">{zeroPad(props.hours)}</p>
-              <p className="text-xs">hours</p>
+              <p className="text-xs text-gray-400">hours</p>
             </div>
             <div className="flex-1 text-white w-10 w-15 p-0 lg:p-1 flex justify-start lg:justify-evenly items-center gap-x-1">
               <p className="text-sm">{zeroPad(props.minutes)}</p>
-              <p className="text-xs">mins</p>
+              <p className="text-xs text-gray-400">mins</p>
             </div>
             <div className="flex-1  text-white w-10 w-15 p-0 lg:p-1 flex justify-start lg:justify-evenly items-center gap-x-1">
               <p className="text-sm">{zeroPad(props.seconds)}</p>
-              <p className="text-xs">secs</p>
+              <p className="text-xs text-gray-400">secs</p>
             </div>
           </div>
         )

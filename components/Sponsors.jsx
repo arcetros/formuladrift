@@ -24,12 +24,12 @@ const Item = ({ image, url }) => {
     <Link href={url} passHref={true}>
       <a target="_blank" className="h-full container">
         <div className="relative filter grayscale-0 lg:grayscale hover:grayscale-0">
-          <div className="relative h-[8rem] lg:h-[8rem] lg:w-full">
+          <div className="relative h-[100px] lg:w-full">
             <Image
               src={`/sponsors/${image}.png`}
               alt="Sponsors"
               layout="fill"
-              className="object-cover w-full relative"
+              className="object-cover relative"
             />
           </div>
         </div>
@@ -39,50 +39,12 @@ const Item = ({ image, url }) => {
 }
 
 export const Sponsors = () => {
-  const settings = {
-    infinite: true,
-    slidesToScroll: 5,
-    slidesToShow: 5,
-    arrows: false,
-    autoplay: true,
-    speed: 6000,
-    autoplaySpeed: 0,
-    cssEase: 'linear',
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  }
   return (
-    <section className="relative w-full bg-gray-900">
-      <div className="max-h-full mx-auto">
-        <Slider {...settings}>
-          {sponsors.map((item, id) => {
-            return <Item key={id} image={item[0]} col={item[1]} url={item[2]} />
-          })}
-        </Slider>
+    <section className="container max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem] flex mx-auto my-12 relative w-full bg-gray-900">
+      <div className="flex w-full">
+        {sponsors.map((item, id) => {
+          return <Item key={id} image={item[0]} col={item[1]} url={item[2]} />
+        })}
       </div>
     </section>
   )

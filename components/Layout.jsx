@@ -24,8 +24,8 @@ export const Layout = ({ children }) => {
 
 export const HomeLayout = ({ children }) => {
   return (
-    <div className="relative max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem] mx-auto">
-      <div className="mx-4 md:mx-12 lg:mx-0 xl:mx-44">{children}</div>
+    <div className="max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem] mx-auto">
+      <div className="relative mx-4 md:mx-12 lg:mx-0 xl:mx-44">{children}</div>
     </div>
   )
 }

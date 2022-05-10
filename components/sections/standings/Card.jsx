@@ -8,7 +8,7 @@ export const Card = ({ item, id }) => {
         id == 0 && 'order-2'
       } ${id == 1 && 'order-1 hidden lg:flex'} ${id == 2 && 'order-3 hidden lg:flex'}`}
     >
-      <div className="relative items-center h-52 lg:h-[12rem] xl:h-[14rem] w-[18rem] lg:w-[13.5rem] xl:w-[18rem] mt-2">
+      <div className="relative items-center h-52 lg:h-[14rem] w-[20rem] mt-2">
         <Image
           layout="fill"
           src={item.driver_img.url}

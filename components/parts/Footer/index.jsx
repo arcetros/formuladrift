@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Layout, HomeLayout } from '/components/'
-import Icon from './ui/icon/'
+import { Layout, HomeLayout } from '../../'
+import Icon from '../../ui/icon'
 
 let socials = [
   { name: 'instagram', href: 'https://www.instagram.com/arcetros/' },
@@ -18,7 +18,7 @@ const SocialsIcon = ({ name, href }) => {
   )
 }
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <Layout>
       <footer className="my-16">
@@ -73,5 +73,3 @@ const Footer = () => {
     </Layout>
   )
 }
-
-export default Footer

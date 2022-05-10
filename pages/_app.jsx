@@ -4,8 +4,7 @@ import 'tailwindcss/tailwind.css'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { AnimatePresence } from 'framer-motion'
 import { fetchAPI } from '../lib/api'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import { Header, Footer } from '../components'
 import '/styles/globals.css'
 
 const queryClient = new QueryClient()
