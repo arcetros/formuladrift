@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { marked } from 'marked'
 import moment from 'moment'
 import { fetchAPI } from '../../lib/api'
-import { Layout, Typography, SubCard } from '../../components'
+import { Layout, SubCard } from '../../components'
 
 export default function Article({ posts, otherPosts }) {
   const currentExcluded = _.shuffle(otherPosts).filter((item) => item.id != posts.id)
@@ -55,9 +55,6 @@ export default function Article({ posts, otherPosts }) {
             <div className="my-6 mx-4 lg:mx-0">
               <div className="relative flex items-center mb-6">
                 <div className="w-2 h-full bg-red-500 absolute"></div>
-                <Typography size="lg" type="primary" styles="ml-4">
-                  More News
-                </Typography>
               </div>
               <div className="flex flex-col lg:flex-row">
                 <SubCard posts={shuffleArray} />

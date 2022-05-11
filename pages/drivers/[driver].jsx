@@ -1,24 +1,8 @@
-import { useState } from 'react'
 import Image from 'next/image'
-// import { marked } from 'marked'
-// import YouTube from 'react-youtube'
 import { fetchAPI } from '/lib/api'
-import { WinsModal, Name, DriverImage, Layout } from '/components/'
+import { Name, DriverImage, Layout } from '/components/'
 
 export default function Driver({ driver }) {
-  const [toggleModal, setToggleModal] = useState(false)
-
-  const close = () => {
-    setToggleModal(false)
-  }
-  // const opts = {
-  //   playerVars: {
-  //     // https://developers.google.com/youtube/player_parameters
-  //     autoplay: 0,
-  //   },
-  // }
-  // react-youtube ! do it soon !
-
   return (
     <Layout>
       <div className="absolute inset-0 w-full">
@@ -48,8 +32,6 @@ export default function Driver({ driver }) {
               </div>
             </div>
           </main>
-
-          {toggleModal && <WinsModal handleClose={close} data={driver} driver={driver.slug} />}
         </div>
       </div>
     </Layout>

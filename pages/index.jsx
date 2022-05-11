@@ -84,5 +84,6 @@ export async function getStaticProps() {
 
   return {
     props: { newPosts, currentSchedule, slicedTweets },
+    revalidate: 1,
   }
 }
