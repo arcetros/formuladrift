@@ -4,7 +4,6 @@ import moment from 'moment'
 import _ from 'lodash'
 
 const Card = (props) => {
-  console.log(props)
   return (
     <Link href={`https://twitter.com/FormulaDrift/status/${props.data.id}`}>
       <a

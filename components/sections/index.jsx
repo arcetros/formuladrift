@@ -1,6 +1,5 @@
 export * from './hero/'
 export * from './schedule/'
 export * from './standings/'
-export * from './league/'
 export * from './news/'
 export * from './tweets'

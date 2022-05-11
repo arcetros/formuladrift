@@ -3,10 +3,7 @@ import _ from 'lodash'
 import { fetchAPI } from '../lib/api'
 import { Layout, Hero, Schedule, Standings, News, Tweets } from '../components'
 
-export default function Home({ newPosts, currentSchedule, tweets }) {
-  console.log(tweets)
-  const slicedTweets = tweets.data.slice(0, 4)
-  console.log(slicedTweets)
+export default function Home({ newPosts, currentSchedule, slicedTweets: tweets }) {
   return (
     <Layout>
       <div className="flex flex-col gap-y-8">
@@ -14,7 +11,7 @@ export default function Home({ newPosts, currentSchedule, tweets }) {
         <News posts={newPosts} />
         <Standings />
         <Schedule currentSchedule={currentSchedule} />
-        <Tweets data={slicedTweets} />
+        <Tweets data={tweets} />
         {/* <League /> */}
         <div className="relative max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem] w-full flex mx-auto my-12">
           <div className="mx-4 md:mx-12 lg:mx-0 xl:mx-44 w-full">
@@ -77,6 +74,7 @@ export async function getStaticProps() {
     }
   )
   const tweets = await tweetRes.json()
+  const slicedTweets = tweets.data.slice(0, 4)
 
   const newPosts = _.orderBy(posts, ['id'], ['asc'])
   let date = new Date().toISOString()
@@ -85,6 +83,6 @@ export async function getStaticProps() {
   const currentSchedule = newSchedule[0]
 
   return {
-    props: { newPosts, currentSchedule, tweets },
+    props: { newPosts, currentSchedule, slicedTweets },
   }
 }

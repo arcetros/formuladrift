@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import _ from 'lodash'
 import moment from 'moment'
-import { useMobile } from '/utils/hooks/'
+import useMobile from '../../../../hooks/useMobile'
 
 export const ArticleCard = ({ posts, id }) => {
   const { isMobile } = useMobile()

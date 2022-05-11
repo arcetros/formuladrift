@@ -1,5 +1,2 @@
-export * from './Stats'
 export * from './Name'
 export * from './DriverImage'
-export * from './Wins'
-export * from './main/'

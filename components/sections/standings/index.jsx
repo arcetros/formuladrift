@@ -4,20 +4,10 @@ import { useQuery } from 'react-query'
 import Image from 'next/image'
 import Tab from './Tab'
 import { Card } from './Card'
-import { useMobile } from '/utils/hooks/'
+import useMobile from '../../../hooks/useMobile'
 import { fetchAPI } from '/lib/api'
 
 const leagues = ['pro', 'prospec', 'fd-jap']
-
-// const getDrivers = async (key) => {
-//   const category = key.queryKey[1].category
-//   if (category) {
-//     const drivers = await Promise.resolve(fetchAPI(`/drivers?category=${category}`))
-//     return drivers
-//   }
-//   const drivers = await Promise.resolve(fetchAPI('/drivers?category=pro'))
-//   return drivers
-// }
 
 export const Standings = ({ drivers }) => {
   const [active, setActive] = useState(leagues[0])
