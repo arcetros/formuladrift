@@ -24,7 +24,7 @@
     "lodash": "^4.17.21",
     "marked": "^4.0.0",
     "moment": "^2.29.1",
-    "next": "^12.0.2",
+    "next": "^12.1.0",
     "prettier": "^2.5.0",
     "react": "17.0.2",
     "react-countdown": "^2.3.2",
