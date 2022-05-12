@@ -46,7 +46,7 @@ const Menu = ({ setIsShowMenu }) => {
             </ul>
           </div>
         </div>
-        <div className="flex items-center mt-12 gap-x-5">
+        <div className="flex items-center mt-4 gap-x-5">
           <SocialsIcon />
         </div>
         <div className="flex my-8 font-primary font-extrabold text-sm cursor-pointer">

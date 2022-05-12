@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import moment from 'moment'
+import Icon from '../../../ui/icon'
 import { Skeleton } from './Skeleton'
 
 export const SubCard = ({ posts }) => {
@@ -19,26 +19,15 @@ export const SubCard = ({ posts }) => {
             .map((item, id) => {
               return (
                 <Link as={`/news/${item.slug}`} href="/news/[slug]" passHref={true} key={id}>
-                  <a className="mb-4 md:container md:mr-3 last:mr-0 shadow-md transform transition duration-200 hover:scale-105">
-                    <div className="relative flex flex-shrink-0 w-[auto] h-[220px] md:h-[230px]">
-                      <Image
-                        className="relative h-full w-full object-cover rounded"
-                        layout="fill"
-                        src={item.thumbnail.url}
-                        alt={item.title}
-                      />
+                  <a className="flex items-center justify-between bg-gray-900 font-primary text-white py-4 px-4 mb-4 md:container md:mr-3 last:mr-0 shadow-md transform transition duration-200 hover:scale-105">
+                    <div className="relative">
+                      <p className="font-semibold text-sm text-gray-50 mt-1">{item.title}</p>
+                      <span className="text-sm text-gray-500">
+                        {moment(item.published_at).format('l')}
+                      </span>
                     </div>
-
-                    <div className="px-4 my-4 relative">
-                      <span className="text-sm font-bold text-gray-500">
-                        {moment(item.published_at).format('dddd')}
-                      </span>
-                      <span className="mx-1 text-sm text-gray-400">|</span>
-                      <span className="text-sm text-gray-400">
-                        {moment(item.published_at).format('MMM Do YY')}
-                      </span>
-
-                      <p className="font-semibold text-sm text-gray-900 mt-1">{item.title}</p>
+                    <div>
+                      <Icon type="ChevronRight" />
                     </div>
                   </a>
                 </Link>

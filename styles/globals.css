@@ -11,6 +11,8 @@ body {
   padding: 0;
   position: relative;
   background-color: #111;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* width */
@@ -41,5 +43,15 @@ body {
 @media only screen and (max-width: 768px) {
   ::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@layer base {
+  h1 {
+    @apply text-white;
+  }
+
+  blockquote p {
+    @apply text-white;
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Navigation from './Navigation'
@@ -23,17 +23,19 @@ export const Hero = ({ posts }) => {
     }
   }, [number])
 
-  const nextCarousel = () => {
-    setTimeout(() => {
-      setNumber((number) => number + 1)
-    }, 300)
-  }
-
-  const prevCarousel = () => {
-    setTimeout(() => {
-      setNumber((number) => number + 1)
-    }, 300)
-  }
+  const handleClick = useCallback(async (direction) => {
+    if (direction === 'next') {
+      setTimeout(() => {
+        setNumber((number) => number + 1)
+      }, 300)
+    } else if (direction === 'previous') {
+      setTimeout(() => {
+        setNumber((number) => number - 1)
+      }, 300)
+    } else {
+      return
+    }
+  }, [])
 
   const updatedPost = useMemo(() => posts.slice(0, 4), [posts])
 
@@ -46,33 +48,33 @@ export const Hero = ({ posts }) => {
             return (
               <div
                 key={id}
-                className="relative flex lg:static min-h-[90vh] mx-auto md:min-h-screen w-full max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem]"
+                className="flex h-screen min-h-[576px] mx-auto w-full max-w-[105rem] lg:max-w-[60rem] xl:max-w-[105rem]"
               >
                 <div className="min-w-full flex flex-col mx-auto justify-between pt-2 my-16">
-                  <div className="absolute inset-0 w-full">
+                  <div className="absolute inset-0 w-screen">
                     <AnimatePresence>
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ ease: 'easeIn', duration: 0.3 }}
-                        className="relative h-[90vh]"
+                        className="relative h-screen min-h-[576px]"
                       >
                         <Image
                           layout="fill"
                           src={item.thumbnail.url}
                           alt={item.slug}
-                          className="relative object-cover"
+                          objectFit="cover"
                         />
-                        <div className="absolute flex bg-gradient-to-t from-[#111] -bottom-1 left-0 h-[200%] w-full">
+                        <div className="absolute flex bg-gradient-to-b from-gray-900/10 to-[#111] bottom-0 left-0 h-screen lg:h-[140vh] min-h-[576px] w-full">
                           <div
                             className="w-1/2 z-20 lg:hidden"
-                            onClick={nextCarousel}
+                            onClick={() => handleClick('previous')}
                             aria-hidden={true}
                           ></div>
                           <div
                             className="w-1/2 z-20 lg:hidden"
-                            onClick={prevCarousel}
+                            onClick={() => handleClick('next')}
                             aria-hidden={true}
                           ></div>
                         </div>

@@ -7,6 +7,29 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      typography: {
+        white: {
+          css: {
+            h1: {
+              color: colors.gray['50'],
+            },
+            h4: {
+              color: colors.gray['50'],
+            },
+            p: {
+              color: colors.gray['50'],
+            },
+            thead: {
+              color: colors.gray['50'],
+            },
+            tr: {
+              td: {
+                color: colors.gray['50'],
+              },
+            },
+          },
+        },
+      },
       screens: {
         '1md': { max: '1241px' },
         '1.5xl': '1350px',
@@ -240,6 +263,10 @@ module.exports = {
           700: '#b91c1c',
           800: '#991b1b',
           900: '#7f1d1d',
+        },
+        backgroundImage: {
+          'gradient-to-b':
+            'linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#111 68%,#111 100%);',
         },
       },
       fontFamily: {

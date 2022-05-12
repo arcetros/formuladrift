@@ -46,19 +46,15 @@ export default function Article({ posts, otherPosts }) {
             )}
             <section className="font-primary my-16 mx-4 md:mx-16 lg:mx-0 leading-relaxed">
               <article
-                className="prose prose-md md:prose-lg lg:prose-xl mx-auto text-white"
+                className="prose prose-white prose-md md:prose-lg lg:prose-xl mx-auto"
                 dangerouslySetInnerHTML={{ __html: marked(posts.content) }}
               />
             </section>
           </div>
-          <section className="relative">
-            <div className="my-6 mx-4 lg:mx-0">
-              <div className="relative flex items-center mb-6">
-                <div className="w-2 h-full bg-red-500 absolute"></div>
-              </div>
-              <div className="flex flex-col lg:flex-row">
-                <SubCard posts={shuffleArray} />
-              </div>
+          <section className="flex flex-col gap-y-4 relative mt-16">
+            <h1 className="font-primary font-bold text-xl md:text-2xl">Related Content</h1>
+            <div className="flex flex-col lg:flex-row">
+              <SubCard posts={shuffleArray} />
             </div>
           </section>
         </div>

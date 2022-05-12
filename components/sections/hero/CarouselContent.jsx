@@ -6,13 +6,13 @@ const CarouselContent = ({ content }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="w-full text-white md:min-h-0 z-30"
+        className="text-white md:min-h-0 z-30"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ ease: 'easeIn', duration: 0.5 }}
       >
-        <div className="flex flex-col gap-y-3 mx-4 md:mx-12 lg:mx-0 xl:mx-44">
+        <div className="flex flex-col gap-y-3 relative mx-4 md:mx-12 lg:mx-0 xl:mx-44">
           <p className="text-gray-200 text-sm md:text-base lg:text-xl italic font-secondary">
             News - {moment(content.published_at).format('LL')}
           </p>
